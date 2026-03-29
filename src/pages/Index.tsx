@@ -9,8 +9,10 @@ import { SpecialistRecommendation } from '@/components/SpecialistRecommendation'
 import { NextStepsCard } from '@/components/NextStepsCard';
 import { useSymptomChat } from '@/hooks/useSymptomChat';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
+  const { t } = useTranslation();
   const {
     session,
     isTyping,
@@ -57,10 +59,10 @@ const Index = () => {
               <span className="text-3xl">👨‍⚕️</span>
               <div>
                 <h2 className="font-bold text-lg text-foreground">
-                  Your Assessment is Ready
+                  {t('index.assessmentReady')}
                 </h2>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Based on our conversation about "{session.initialSymptom}", here's what I found...
+                  {t('index.assessmentBasedOn', { symptom: session.initialSymptom })}
                 </p>
               </div>
             </div>
@@ -83,8 +85,7 @@ const Index = () => {
 
             {/* Final Disclaimer */}
             <p className="text-xs text-muted-foreground text-center px-4 pb-8">
-              💚 Take care of yourself! Remember, Doctor Uncle is here to guide you, 
-              but always seek professional medical advice for serious concerns.
+              {t('index.disclaimer')}
             </p>
           </div>
         )}

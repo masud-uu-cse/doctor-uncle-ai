@@ -1,6 +1,7 @@
 import { ListChecks, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useTranslation } from 'react-i18next';
 
 interface NextStepsCardProps {
   steps: string[];
@@ -8,6 +9,7 @@ interface NextStepsCardProps {
 }
 
 export const NextStepsCard = ({ steps, onStartOver }: NextStepsCardProps) => {
+  const { t } = useTranslation();
   return (
     <Card className="border-none shadow-card animate-fade-in-up">
       <CardHeader className="pb-3">
@@ -15,10 +17,10 @@ export const NextStepsCard = ({ steps, onStartOver }: NextStepsCardProps) => {
           <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
             <ListChecks className="h-4 w-4 text-primary" />
           </div>
-          Next Steps
+          {t('nextSteps.title')}
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          Follow these steps for the best recovery
+          {t('nextSteps.subtitle')}
         </p>
       </CardHeader>
       
@@ -39,7 +41,7 @@ export const NextStepsCard = ({ steps, onStartOver }: NextStepsCardProps) => {
         
         <div className="pt-4">
           <Button onClick={onStartOver} className="w-full gap-2" variant="outline">
-            Start New Assessment
+            {t('nextSteps.startNew')}
             <ArrowRight className="h-4 w-4" />
           </Button>
         </div>

@@ -1,40 +1,42 @@
 import { AlertTriangle, CheckCircle, AlertCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TriageLevel } from '@/types/health';
+import { useTranslation } from 'react-i18next';
 
 interface TriageResultCardProps {
   level: TriageLevel;
   possibleCauses: string[];
 }
 
-const triageConfig = {
-  mild: {
-    icon: CheckCircle,
-    title: 'Mild Concern',
-    description: 'Your symptoms appear manageable with home care',
-    bgClass: 'bg-triage-mild/10',
-    textClass: 'text-triage-mild',
-    badgeClass: 'triage-mild'
-  },
-  moderate: {
-    icon: AlertCircle,
-    title: 'Moderate Concern',
-    description: 'Consider seeing a doctor if symptoms persist',
-    bgClass: 'bg-triage-moderate/10',
-    textClass: 'text-triage-moderate',
-    badgeClass: 'triage-moderate'
-  },
-  severe: {
-    icon: AlertTriangle,
-    title: 'Urgent Concern',
-    description: 'Please seek medical attention promptly',
-    bgClass: 'bg-triage-severe/10',
-    textClass: 'text-triage-severe',
-    badgeClass: 'triage-severe'
-  }
-};
-
 export const TriageResultCard = ({ level, possibleCauses }: TriageResultCardProps) => {
+  const { t } = useTranslation();
+
+  const triageConfig = {
+    mild: {
+      icon: CheckCircle,
+      title: t('triage.mildTitle'),
+      description: t('triage.mildDesc'),
+      bgClass: 'bg-triage-mild/10',
+      textClass: 'text-triage-mild',
+      badgeClass: 'triage-mild'
+    },
+    moderate: {
+      icon: AlertCircle,
+      title: t('triage.moderateTitle'),
+      description: t('triage.moderateDesc'),
+      bgClass: 'bg-triage-moderate/10',
+      textClass: 'text-triage-moderate',
+      badgeClass: 'triage-moderate'
+    },
+    severe: {
+      icon: AlertTriangle,
+      title: t('triage.severeTitle'),
+      description: t('triage.severeDesc'),
+      bgClass: 'bg-triage-severe/10',
+      textClass: 'text-triage-severe',
+      badgeClass: 'triage-severe'
+    }
+  };
   const config = triageConfig[level];
   const Icon = config.icon;
 
@@ -53,7 +55,7 @@ export const TriageResultCard = ({ level, possibleCauses }: TriageResultCardProp
       </div>
       
       <CardContent className="p-4">
-        <h4 className="font-semibold text-foreground mb-3">Possible Causes</h4>
+        <h4 className="font-semibold text-foreground mb-3">{t('triage.possibleCauses')}</h4>
         <ul className="space-y-2">
           {possibleCauses.map((cause, index) => (
             <li key={index} className="flex items-start gap-2">

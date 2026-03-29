@@ -3,23 +3,25 @@ import { Mic, Send, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
+import { useTranslation } from 'react-i18next';
 
 interface SymptomInputProps {
   onSubmit: (symptom: string) => void;
 }
 
-const quickSymptoms = [
-  "Headache",
-  "Sore throat",
-  "Stomach pain",
-  "Fever",
-  "Back pain",
-  "Cough"
-];
-
 export const SymptomInput = ({ onSubmit }: SymptomInputProps) => {
+  const { t } = useTranslation();
   const [symptom, setSymptom] = useState('');
   const [isRecording, setIsRecording] = useState(false);
+
+  const quickSymptoms = [
+    { key: 'headache', text: t('symptomInput.quick.headache') },
+    { key: 'soreThroat', text: t('symptomInput.quick.soreThroat') },
+    { key: 'stomachPain', text: t('symptomInput.quick.stomachPain') },
+    { key: 'fever', text: t('symptomInput.quick.fever') },
+    { key: 'backPain', text: t('symptomInput.quick.backPain') },
+    { key: 'cough', text: t('symptomInput.quick.cough') }
+  ];
 
   const handleSubmit = () => {
     if (symptom.trim()) {
@@ -45,11 +47,10 @@ export const SymptomInput = ({ onSubmit }: SymptomInputProps) => {
             <div className="text-4xl">👨‍⚕️</div>
             <div className="flex-1">
               <h2 className="text-xl font-bold text-foreground mb-2">
-                Hello! I'm Doctor Uncle
+                {t('symptomInput.greetingTitle')}
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                Tell me what's bothering you today. Describe your symptoms in your own words, 
-                and I'll ask some follow-up questions to help you better.
+                {t('symptomInput.greetingDesc')}
               </p>
             </div>
           </div>
@@ -61,7 +62,7 @@ export const SymptomInput = ({ onSubmit }: SymptomInputProps) => {
         <CardContent className="p-4">
           <div className="relative">
             <Textarea
-              placeholder="Describe your symptoms... (e.g., 'I've had a headache for 2 days')"
+              placeholder={t('symptomInput.placeholder')}
               value={symptom}
               onChange={(e) => setSymptom(e.target.value)}
               className="min-h-[120px] resize-none pr-12 text-base border-2 focus:border-primary transition-colors"
@@ -84,7 +85,7 @@ export const SymptomInput = ({ onSubmit }: SymptomInputProps) => {
 
           <div className="flex justify-between items-center mt-4">
             <span className="text-sm text-muted-foreground">
-              Press Enter to send
+              {t('symptomInput.pressEnter')}
             </span>
             <Button
               onClick={handleSubmit}
@@ -92,7 +93,7 @@ export const SymptomInput = ({ onSubmit }: SymptomInputProps) => {
               className="gap-2"
             >
               <Send className="h-4 w-4" />
-              Start Assessment
+              {t('symptomInput.startAssessment')}
             </Button>
           </div>
         </CardContent>
@@ -102,16 +103,16 @@ export const SymptomInput = ({ onSubmit }: SymptomInputProps) => {
       <div className="space-y-3">
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Sparkles className="h-4 w-4" />
-          <span>Common symptoms</span>
+          <span>{t('symptomInput.commonSymptoms')}</span>
         </div>
         <div className="flex flex-wrap gap-2">
           {quickSymptoms.map((quick) => (
             <button
-              key={quick}
-              onClick={() => handleQuickSymptom(quick)}
+              key={quick.key}
+              onClick={() => handleQuickSymptom(quick.text)}
               className="px-4 py-2 rounded-full bg-secondary text-secondary-foreground text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors"
             >
-              {quick}
+              {quick.text}
             </button>
           ))}
         </div>
@@ -119,8 +120,7 @@ export const SymptomInput = ({ onSubmit }: SymptomInputProps) => {
 
       {/* Disclaimer */}
       <p className="text-xs text-muted-foreground text-center px-4">
-        ⚠️ This is for informational purposes only. Always consult a healthcare 
-        professional for medical advice, diagnosis, or treatment.
+        {t('symptomInput.disclaimer')}
       </p>
     </div>
   );

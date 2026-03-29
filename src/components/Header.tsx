@@ -1,8 +1,12 @@
 import { Stethoscope, ArrowLeft } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { LanguageToggle } from '@/components/language-toggle';
+import { useTranslation } from 'react-i18next';
 
 export const Header = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const showBack = location.pathname !== '/';
@@ -30,20 +34,18 @@ export const Header = () => {
             </div>
             <div className="flex flex-col">
               <h1 className="text-lg font-bold text-foreground leading-tight">
-                Doctor Uncle
+                {t('header.title')}
               </h1>
               <span className="text-xs text-muted-foreground">
-                AI Health Assistant
+                {t('header.subtitle')}
               </span>
             </div>
           </div>
         </div>
         
         <div className="flex items-center gap-2">
-          <div className="hidden sm:flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            Online
-          </div>
+          <LanguageToggle />
+          <ThemeToggle />
         </div>
       </div>
     </header>

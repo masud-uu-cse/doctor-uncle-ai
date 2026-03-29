@@ -1,12 +1,14 @@
 import { Leaf } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { HomeRemedy } from '@/types/health';
+import { useTranslation } from 'react-i18next';
 
 interface HomeRemediesCardProps {
   remedies: HomeRemedy[];
 }
 
 export const HomeRemediesCard = ({ remedies }: HomeRemediesCardProps) => {
+  const { t } = useTranslation();
   return (
     <Card className="border-none shadow-card animate-fade-in-up">
       <CardHeader className="pb-3">
@@ -14,10 +16,10 @@ export const HomeRemediesCard = ({ remedies }: HomeRemediesCardProps) => {
           <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
             <Leaf className="h-4 w-4 text-accent" />
           </div>
-          Home Remedies
+          {t('homeRemedies.title')}
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          Natural ways to feel better at home
+          {t('homeRemedies.subtitle')}
         </p>
       </CardHeader>
       
