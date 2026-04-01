@@ -1,12 +1,14 @@
 import { Pill, Clock, Info } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Medicine } from '@/types/health';
+import { useTranslation } from 'react-i18next';
 
 interface MedicineSuggestionCardProps {
   medicines: Medicine[];
 }
 
 export const MedicineSuggestionCard = ({ medicines }: MedicineSuggestionCardProps) => {
+  const { t } = useTranslation();
   return (
     <Card className="border-none shadow-card animate-fade-in-up">
       <CardHeader className="pb-3">
@@ -14,10 +16,10 @@ export const MedicineSuggestionCard = ({ medicines }: MedicineSuggestionCardProp
           <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
             <Pill className="h-4 w-4 text-primary" />
           </div>
-          OTC Medicines
+          {t('medicine.title')}
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          Over-the-counter medications that may help
+          {t('medicine.subtitle')}
         </p>
       </CardHeader>
       
@@ -49,7 +51,7 @@ export const MedicineSuggestionCard = ({ medicines }: MedicineSuggestionCardProp
         ))}
         
         <p className="text-xs text-muted-foreground text-center pt-2 border-t border-border">
-          ⚠️ Always read labels and consult a pharmacist if unsure
+          {t('medicine.disclaimer')}
         </p>
       </CardContent>
     </Card>

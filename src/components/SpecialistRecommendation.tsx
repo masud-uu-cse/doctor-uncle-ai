@@ -1,5 +1,6 @@
 import { UserRound, Clock, MessageCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useTranslation } from 'react-i18next';
 
 interface SpecialistRecommendationProps {
   specialist: {
@@ -10,6 +11,7 @@ interface SpecialistRecommendationProps {
 }
 
 export const SpecialistRecommendation = ({ specialist }: SpecialistRecommendationProps) => {
+  const { t } = useTranslation();
   return (
     <Card className="border-none shadow-card animate-fade-in-up overflow-hidden">
       <div className="bg-secondary p-4">
@@ -17,7 +19,7 @@ export const SpecialistRecommendation = ({ specialist }: SpecialistRecommendatio
           <div className="w-8 h-8 rounded-full bg-secondary-foreground/10 flex items-center justify-center">
             <UserRound className="h-4 w-4 text-secondary-foreground" />
           </div>
-          Specialist Recommendation
+          {t('specialist.title')}
         </CardTitle>
       </div>
       

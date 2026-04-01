@@ -86,14 +86,6 @@ export const mockHealthResult: HealthResult = {
   ]
 };
 
-export const aiGreetings = [
-  "Hello there! I'm Doctor Uncle, your friendly health assistant. 👨‍⚕️",
-  "Don't worry, you're in good hands. Let me ask you a few questions to better understand how you're feeling.",
-  "Remember, I'm here to guide you – but always consult a real doctor for serious concerns!"
-];
 
-export const aiClosingMessages = [
-  "Based on our conversation, I've prepared a comprehensive assessment for you.",
-  "Remember, this is guidance only. If you feel your condition is serious, please seek immediate medical attention.",
-  "Take care of yourself! Your health is your greatest wealth. 💚"
-];
+// aiGreetings and aiClosingMessages have been moved to i18n.ts
+

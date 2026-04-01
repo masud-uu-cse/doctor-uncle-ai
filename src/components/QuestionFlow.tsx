@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useTranslation } from 'react-i18next';
 
 interface QuestionFlowProps {
   currentQuestion: string;
@@ -16,6 +17,7 @@ export const QuestionFlow = ({
   onAnswer,
   isTyping
 }: QuestionFlowProps) => {
+  const { t } = useTranslation();
   const [customAnswer, setCustomAnswer] = useState('');
 
   const handleSubmit = () => {
@@ -58,7 +60,7 @@ export const QuestionFlow = ({
       {/* Custom Input */}
       <div className="flex gap-2">
         <Input
-          placeholder="Type your answer..."
+          placeholder={t('questionFlow.placeholder')}
           value={customAnswer}
           onChange={(e) => setCustomAnswer(e.target.value)}
           onKeyDown={(e) => {

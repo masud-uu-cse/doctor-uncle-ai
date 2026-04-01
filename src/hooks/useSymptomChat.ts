@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Message, SymptomSession, HealthResult, TriageLevel } from '@/types/health';
-import { aiGreetings, aiClosingMessages } from '@/data/mockResponses';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from 'react-i18next';
 
 const generateId = () => Math.random().toString(36).substr(2, 9);
 
@@ -20,6 +20,7 @@ interface APIAnswer {
 
 export const useSymptomChat = () => {
   const { toast } = useToast();
+  const { i18n, t } = useTranslation();
   
   const [session, setSession] = useState<SymptomSession>({
     id: generateId(),
@@ -66,9 +67,10 @@ export const useSymptomChat = () => {
     addMessage('user', symptom);
 
     // AI greeting sequence
-    for (let i = 0; i < aiGreetings.length; i++) {
+    const translatedGreetings = t('aiMessages.greetings', { returnObjects: true }) as string[];
+    for (let i = 0; i < translatedGreetings.length; i++) {
       await simulateTyping(() => {
-        addMessage('ai', aiGreetings[i]);
+        addMessage('ai', translatedGreetings[i]);
       }, 1000 + i * 500);
     }
 
@@ -77,7 +79,7 @@ export const useSymptomChat = () => {
       const response = await fetch(`${API_BASE_URL}/questions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ symptoms: symptom })
+        body: JSON.stringify({ symptoms: symptom, language: i18n.language })
       });
 
       if (!response.ok) throw new Error('Failed to fetch questions');
@@ -99,8 +101,8 @@ export const useSymptomChat = () => {
       console.error(error);
       setIsTyping(false);
       toast({
-        title: "Connection Error",
-        description: "Failed to connect to Doctor Uncle AI Backend. Make sure your local server is running.",
+        title: t('aiMessages.errors.connectionTitle'),
+        description: t('aiMessages.errors.connectionDesc'),
         variant: "destructive"
       });
     }
@@ -124,7 +126,7 @@ export const useSymptomChat = () => {
     } else {
       // Complete phase
       await simulateTyping(() => {
-        addMessage('ai', "Thank you. I am analyzing your responses with my medical database to generate a detailed assessment...");
+        addMessage('ai', t('aiMessages.analyzing'));
       }, 1500);
 
       setIsTyping(true);
@@ -135,7 +137,8 @@ export const useSymptomChat = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             symptoms: session.initialSymptom,
-            answers: newAnswers
+            answers: newAnswers,
+            language: i18n.language
           })
         });
 
@@ -145,9 +148,10 @@ export const useSymptomChat = () => {
         setIsTyping(false);
 
         // Show closing messages
-        for (let i = 0; i < aiClosingMessages.length; i++) {
+        const translatedClosing = t('aiMessages.closing', { returnObjects: true }) as string[];
+        for (let i = 0; i < translatedClosing.length; i++) {
           await simulateTyping(() => {
-            addMessage('ai', aiClosingMessages[i]);
+            addMessage('ai', translatedClosing[i]);
           }, 1000);
         }
 
@@ -189,8 +193,8 @@ export const useSymptomChat = () => {
         console.error(error);
         setIsTyping(false);
         toast({
-          title: "Diagnosis Error",
-          description: "Could not retrieve diagnosis from backend.",
+          title: t('aiMessages.errors.diagnosisTitle'),
+          description: t('aiMessages.errors.diagnosisDesc'),
           variant: "destructive"
         });
       }
