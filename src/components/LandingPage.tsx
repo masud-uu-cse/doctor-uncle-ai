@@ -1,8 +1,9 @@
-import { ArrowRight, Heart, AlertTriangle, MessageSquare, Home, Stethoscope, Clock, User, Sparkles } from 'lucide-react';
+import { ArrowRight, Heart, AlertTriangle, MessageSquare, Sparkles, Stethoscope } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { BottomNav } from '@/components/BottomNav';
 
 export const LandingPage = () => {
   const { t } = useTranslation();
@@ -214,44 +215,7 @@ export const LandingPage = () => {
         </Button>
       </div>
 
-      {/* Sticky Mobile Bottom Navigation */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-t border-border px-4 py-2 shadow-lg">
-        <div className="flex justify-around items-center max-w-md mx-auto">
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex flex-col items-center gap-1 text-teal-700 dark:text-teal-400 font-medium text-xs py-1"
-          >
-            <div className="p-1 rounded-full bg-teal-100/80 dark:bg-teal-900/50">
-              <Home className="w-5 h-5" />
-            </div>
-            <span>{t('landingPage.nav.home')}</span>
-          </button>
-
-          <button
-            onClick={handleStartChat}
-            className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground font-medium text-xs py-1 transition-colors"
-          >
-            <Stethoscope className="w-5 h-5" />
-            <span>{t('landingPage.nav.triage')}</span>
-          </button>
-
-          <button
-            onClick={handleStartChat}
-            className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground font-medium text-xs py-1 transition-colors"
-          >
-            <Clock className="w-5 h-5" />
-            <span>{t('landingPage.nav.history')}</span>
-          </button>
-
-          <button
-            onClick={handleStartChat}
-            className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground font-medium text-xs py-1 transition-colors"
-          >
-            <User className="w-5 h-5" />
-            <span>{t('landingPage.nav.profile')}</span>
-          </button>
-        </div>
-      </div>
+      <BottomNav activeTab="home" />
     </div>
   );
 };

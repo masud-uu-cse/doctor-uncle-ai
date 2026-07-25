@@ -1,7 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
-import { Message, SymptomSession, HealthResult, TriageLevel } from '@/types/health';
+import { Message, SymptomSession, HealthResult, TriageLevel, PatientInfo } from '@/types/health';
 import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from '@/hooks/useHistory';
 
 const generateId = () => Math.random().toString(36).substr(2, 9);
 
@@ -19,6 +20,7 @@ interface APIAnswer {
 }
 
 export const useSymptomChat = () => {
+  const { saveRecord } = useHistory();
   const { toast } = useToast();
   const { i18n, t } = useTranslation();
   
@@ -265,6 +267,15 @@ export const useSymptomChat = () => {
           ]
         };
 
+        // Persist to localStorage history
+        saveRecord({
+          id: generateId(),
+          createdAt: new Date().toISOString(),
+          patientInfo: session.patientInfo as PatientInfo,
+          initialSymptom: session.initialSymptom,
+          result: mappedResult
+        });
+
         setSession(prev => ({
           ...prev,
           status: 'complete',
@@ -281,7 +292,7 @@ export const useSymptomChat = () => {
         });
       }
     }
-  }, [session.status, session.patientInfo, session.initialSymptom, questions, currentQuestionIndex, userAnswers, addMessage, simulateTyping, handleInputSubmit, t, i18n.language, toast]);
+  }, [session.status, session.patientInfo, session.initialSymptom, questions, currentQuestionIndex, userAnswers, addMessage, simulateTyping, handleInputSubmit, saveRecord, t, i18n.language, toast]);
 
   const resetSession = useCallback(() => {
     setSession({

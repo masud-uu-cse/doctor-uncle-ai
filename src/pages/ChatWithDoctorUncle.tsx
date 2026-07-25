@@ -10,12 +10,11 @@ import { useSymptomChat } from '@/hooks/useSymptomChat';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { RotateCcw, Home, Stethoscope, Clock, User } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { RotateCcw } from 'lucide-react';
+import { BottomNav } from '@/components/BottomNav';
 
 const ChatWithDoctorUncle = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const {
     session,
     isTyping,
@@ -109,47 +108,7 @@ const ChatWithDoctorUncle = () => {
         )}
       </main>
 
-      {/* Sticky Mobile Bottom Navigation */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-t border-border px-4 py-2 shadow-lg">
-        <div className="flex justify-around items-center max-w-md mx-auto">
-          <button
-            onClick={() => navigate('/')}
-            className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground font-medium text-xs py-1 transition-colors"
-          >
-            <Home className="w-5 h-5" />
-            <span>{t('landingPage.nav.home')}</span>
-          </button>
-
-          <button
-            onClick={() => {
-              resetSession();
-              navigate('/doctor-uncle');
-            }}
-            className="flex flex-col items-center gap-1 text-teal-700 dark:text-teal-400 font-medium text-xs py-1"
-          >
-            <div className="p-1 rounded-full bg-teal-100/80 dark:bg-teal-900/50">
-              <Stethoscope className="w-5 h-5" />
-            </div>
-            <span>{t('landingPage.nav.triage')}</span>
-          </button>
-
-          <button
-            onClick={() => navigate('/doctor-uncle')}
-            className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground font-medium text-xs py-1 transition-colors"
-          >
-            <Clock className="w-5 h-5" />
-            <span>{t('landingPage.nav.history')}</span>
-          </button>
-
-          <button
-            onClick={() => navigate('/doctor-uncle')}
-            className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground font-medium text-xs py-1 transition-colors"
-          >
-            <User className="w-5 h-5" />
-            <span>{t('landingPage.nav.profile')}</span>
-          </button>
-        </div>
-      </div>
+      <BottomNav activeTab="triage" onTriageClick={resetSession} />
     </div>
   );
 };
