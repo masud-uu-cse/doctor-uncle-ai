@@ -8,23 +8,12 @@ import { useTranslation } from 'react-i18next';
 export const Header = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const location = useLocation();
-  const showBack = location.pathname !== '/';
 
   return (
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border">
       <div className="container flex items-center justify-between h-16 px-4">
-        <div className="flex items-center gap-3">
-          {showBack && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => navigate(-1)}
-              className="mr-1"
-            >
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-          )}
+
+        <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
           <div className="flex items-center gap-2">
             <div className="relative">
               <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
