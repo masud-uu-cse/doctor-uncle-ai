@@ -1,21 +1,15 @@
-import { useRef } from 'react';
 import { ArrowRight, Heart, AlertTriangle, MessageSquare, Home, Stethoscope, Clock, User, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useTranslation } from 'react-i18next';
-import { SymptomInput } from '@/components/SymptomInput';
+import { useNavigate } from 'react-router-dom';
 
-interface LandingPageProps {
-  onStartAssessment: (symptom: string) => void;
-  onOpenHistory?: () => void;
-}
-
-export const LandingPage = ({ onStartAssessment }: LandingPageProps) => {
+export const LandingPage = () => {
   const { t } = useTranslation();
-  const inputSectionRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
-  const scrollToInput = () => {
-    inputSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  const handleStartChat = () => {
+    navigate('/chat-with-doctor-uncle');
   };
 
   return (
@@ -45,7 +39,7 @@ export const LandingPage = ({ onStartAssessment }: LandingPageProps) => {
 
           {/* CTA Button */}
           <Button
-            onClick={scrollToInput}
+            onClick={handleStartChat}
             size="lg"
             className="rounded-full px-8 py-6 text-base font-semibold bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 text-white shadow-lg hover:shadow-teal-500/25 transition-all duration-200 group gap-3"
           >
@@ -67,11 +61,6 @@ export const LandingPage = ({ onStartAssessment }: LandingPageProps) => {
       {/* Main Content Area */}
       <main className="container max-w-2xl mx-auto px-4 py-8 space-y-10">
         
-        {/* Input Trigger Section */}
-        <div ref={inputSectionRef} className="scroll-mt-20">
-          <SymptomInput onSubmit={onStartAssessment} />
-        </div>
-
         {/* The Tradition of Care Section */}
         <Card className="border-none shadow-md bg-card dark:bg-slate-900/90 overflow-hidden relative border border-border/60">
           <CardContent className="p-6 md:p-8 space-y-4">
@@ -209,7 +198,7 @@ export const LandingPage = ({ onStartAssessment }: LandingPageProps) => {
       {/* Floating Action Button (FAB) for mobile/desktop */}
       <div className="fixed bottom-20 md:bottom-6 right-5 z-40">
         <Button
-          onClick={scrollToInput}
+          onClick={handleStartChat}
           size="icon"
           className="w-14 h-14 rounded-full bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 text-white shadow-xl hover:scale-105 transition-all duration-200"
           title={t('landingPage.ctaButton')}
@@ -232,7 +221,7 @@ export const LandingPage = ({ onStartAssessment }: LandingPageProps) => {
           </button>
 
           <button
-            onClick={scrollToInput}
+            onClick={handleStartChat}
             className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground font-medium text-xs py-1 transition-colors"
           >
             <Stethoscope className="w-5 h-5" />
@@ -240,7 +229,7 @@ export const LandingPage = ({ onStartAssessment }: LandingPageProps) => {
           </button>
 
           <button
-            onClick={scrollToInput}
+            onClick={handleStartChat}
             className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground font-medium text-xs py-1 transition-colors"
           >
             <Clock className="w-5 h-5" />
@@ -248,7 +237,7 @@ export const LandingPage = ({ onStartAssessment }: LandingPageProps) => {
           </button>
 
           <button
-            onClick={scrollToInput}
+            onClick={handleStartChat}
             className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground font-medium text-xs py-1 transition-colors"
           >
             <User className="w-5 h-5" />
