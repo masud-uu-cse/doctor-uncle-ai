@@ -29,8 +29,10 @@ import {
   ChevronRight,
   AlertTriangle,
   Stethoscope,
+  Download,
 } from 'lucide-react';
 import { BottomNav } from '@/components/BottomNav';
+import { downloadAssessmentPDF } from '@/utils/generatePDF';
 
 // ─────────────────────────────────────────────
 // Helpers
@@ -164,34 +166,48 @@ interface DetailViewProps {
 const DetailView = ({ record, onBack, onDelete }: DetailViewProps) => (
   <div className="space-y-6 animate-fade-in-up">
     {/* Top bar */}
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between gap-2">
       <Button variant="ghost" size="sm" onClick={onBack} className="gap-2 -ml-2">
         <ArrowLeft className="w-4 h-4" />
         Back to History
       </Button>
 
-      <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <Button variant="outline" size="sm" className="gap-2 text-red-500 border-red-300 hover:bg-red-50 dark:hover:bg-red-900/30">
-            <Trash2 className="w-3.5 h-3.5" />
-            Delete
-          </Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Delete assessment?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This will permanently remove this assessment record. This action cannot be undone.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction className="bg-red-600 hover:bg-red-700" onClick={onDelete}>
+      <div className="flex items-center gap-2">
+        {/* Download PDF */}
+        <Button
+          variant="outline"
+          size="sm"
+          className="gap-2 text-teal-600 border-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/30"
+          onClick={() => downloadAssessmentPDF(record)}
+        >
+          <Download className="w-3.5 h-3.5" />
+          Download PDF
+        </Button>
+
+        {/* Delete */}
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant="outline" size="sm" className="gap-2 text-red-500 border-red-300 hover:bg-red-50 dark:hover:bg-red-900/30">
+              <Trash2 className="w-3.5 h-3.5" />
               Delete
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Delete assessment?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This will permanently remove this assessment record. This action cannot be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction className="bg-red-600 hover:bg-red-700" onClick={onDelete}>
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
     </div>
 
     {/* Summary header */}
