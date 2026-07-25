@@ -9,7 +9,7 @@ export const LandingPage = () => {
   const navigate = useNavigate();
 
   const handleStartChat = () => {
-    navigate('/chat-with-doctor-uncle');
+    navigate('/doctor-uncle');
   };
 
   return (
@@ -44,7 +44,7 @@ export const LandingPage = () => {
             
             <Button
               onClick={handleStartChat}
-              size="lg"vector
+              size="lg"
               className="relative rounded-full px-9 py-7 text-base md:text-lg font-bold tracking-wide bg-gradient-to-r from-teal-700 via-emerald-700 to-teal-800 hover:from-teal-600 hover:to-emerald-600 dark:from-teal-500 dark:via-emerald-600 dark:to-teal-600 dark:hover:from-teal-400 dark:hover:to-emerald-500 text-white border-2 border-white/30 dark:border-teal-300/30 shadow-2xl hover:scale-105 transition-all duration-300 group/btn flex items-center gap-3"
             >
               <Stethoscope className="w-6 h-6 text-teal-200 dark:text-teal-100 group-hover/btn:rotate-12 transition-transform duration-300" />

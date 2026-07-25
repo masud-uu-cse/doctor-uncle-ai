@@ -125,7 +125,7 @@ const ChatWithDoctorUncle = () => {
           <button
             onClick={() => {
               resetSession();
-              navigate('/chat-with-doctor-uncle');
+              navigate('/doctor-uncle');
             }}
             className="flex flex-col items-center gap-1 text-teal-700 dark:text-teal-400 font-medium text-xs py-1"
           >
@@ -136,7 +136,7 @@ const ChatWithDoctorUncle = () => {
           </button>
 
           <button
-            onClick={() => navigate('/chat-with-doctor-uncle')}
+            onClick={() => navigate('/doctor-uncle')}
             className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground font-medium text-xs py-1 transition-colors"
           >
             <Clock className="w-5 h-5" />
@@ -144,7 +144,7 @@ const ChatWithDoctorUncle = () => {
           </button>
 
           <button
-            onClick={() => navigate('/chat-with-doctor-uncle')}
+            onClick={() => navigate('/doctor-uncle')}
             className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground font-medium text-xs py-1 transition-colors"
           >
             <User className="w-5 h-5" />
