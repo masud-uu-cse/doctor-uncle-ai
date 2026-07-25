@@ -1,5 +1,11 @@
 export type TriageLevel = 'mild' | 'moderate' | 'severe';
 
+export interface PatientInfo {
+  name: string;
+  age: string;
+  gender: string;
+}
+
 export interface Message {
   id: string;
   role: 'ai' | 'user';
@@ -36,8 +42,9 @@ export interface HealthResult {
 
 export interface SymptomSession {
   id: string;
+  patientInfo: PatientInfo;
   initialSymptom: string;
   messages: Message[];
   result?: HealthResult;
-  status: 'input' | 'questioning' | 'complete';
+  status: 'input_name' | 'input_age' | 'input_gender' | 'input_symptom' | 'questioning' | 'complete';
 }

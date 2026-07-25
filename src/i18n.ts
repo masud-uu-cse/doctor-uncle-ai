@@ -59,16 +59,58 @@ const resources = {
       specialist: {
         title: "Specialist Recommendation"
       },
+      intake: {
+        askName: "Hello! I'm Doctor Uncle. 👨‍⚕️ Before we begin your health checkup, may I please have your full name?",
+        placeholderName: "Enter your full name (e.g., Rahul Ahmed)...",
+        askAge: "Nice to meet you, {{name}}! How old are you?",
+        placeholderAge: "Enter your age in years...",
+        ageOptions: ["18-30", "31-45", "46-60", "Over 60"],
+        askGender: "What is your gender?",
+        genderOptions: ["Male", "Female", "Other"],
+        askSymptom: "Thank you, {{name}}. Now please describe what health problem or symptoms you are experiencing in detail.",
+        placeholderSymptom: "Describe symptoms in detail... (e.g., 'I've had severe headache and fever for 2 days')"
+      },
+      landingPage: {
+        badge: "AI TRIAGE FOR FAMILIES",
+        title: "Your Trusted 'Doctor Uncle' – Now AI Powered",
+        subtitle: "Get early medical triage and guided advice from the comfort of your home, anytime you need it.",
+        ctaButton: "Let's Chat With Doctor Uncle",
+        traditionTitle: "The Tradition of Care",
+        traditionText: "In every Bangladeshi family, there is a 'Doctor Uncle'—that one relative everyone calls first when a child has a fever or an elder feels unwell. We bring that same warmth, patience, and wisdom to your phone.",
+        traditionQuote: "\"Uncle, little Rahul has a cough...\" We listen just like family would, but with the precision of advanced AI medical logic.",
+        howItWorksTitle: "How it works",
+        step1Title: "Tell us how you feel",
+        step1Desc: "Describe symptoms in your own words, just like a casual conversation.",
+        step2Title: "Answer guided questions",
+        step2Desc: "Doctor Uncle will ask specific follow-ups to understand the severity.",
+        step3Title: "Get structured advice",
+        step3Desc: "Receive clear OTC suggestions, specialist needs, or emergency alerts.",
+        bannerTag: "Clinical logic. Family warmth.",
+        disclaimerTitle: "MEDICAL DISCLAIMER",
+        disclaimerText: "Doctor Uncle AI is a decision support tool for triage. It is not a replacement for a professional medical consultation, diagnosis, or treatment. In case of a life-threatening emergency, please visit the nearest hospital immediately.",
+        nav: {
+          home: "Home",
+          triage: "Check Up",
+          history: "History",
+          profile: "Profile"
+        },
+        footer: {
+          privacy: "Privacy Policy",
+          terms: "Terms of Service",
+          disclaimer: "AI Disclaimer",
+          contact: "Contact Support"
+        }
+      },
       aiMessages: {
         greetings: [
-          "Hello there! I'm Doctor Uncle, your friendly health assistant. 👨‍⚕️",
+          "Hello there! I'm Doctor Uncle, your friendly health assistant. \uD83D\uDC68\u200D\u2695\uFE0F",
           "Don't worry, you're in good hands. Let me ask you a few questions to better understand how you're feeling.",
           "Remember, I'm here to guide you – but always consult a real doctor for serious concerns!"
         ],
         closing: [
           "Based on our conversation, I've prepared a comprehensive assessment for you.",
           "Remember, this is guidance only. If you feel your condition is serious, please seek immediate medical attention.",
-          "Take care of yourself! Your health is your greatest wealth. 💚"
+          "Take care of yourself! Your health is your greatest wealth. \uD83D\uDC9A"
         ],
         analyzing: "Thank you. I am analyzing your responses with my medical database to generate a detailed assessment...",
         errors: {
@@ -77,6 +119,32 @@ const resources = {
           diagnosisTitle: "Diagnosis Error",
           diagnosisDesc: "Could not retrieve diagnosis from backend."
         }
+      },
+      chatPage: {
+        patientLabel: "Patient",
+        yrs: "yrs"
+      },
+      historyPage: {
+        title: "Assessment History",
+        backToHistory: "Back to History",
+        downloadPdf: "Download PDF",
+        delete: "Delete",
+        cancel: "Cancel",
+        clearAll: "Clear all",
+        deleteTitle: "Delete assessment?",
+        deleteDesc: "This will permanently remove {{name}}'s assessment from history. This action cannot be undone.",
+        deleteDescGeneric: "This will permanently remove this assessment record. This action cannot be undone.",
+        clearTitle: "Clear all history?",
+        clearDesc: "This will permanently delete all {{count}} assessment records. This cannot be undone.",
+        assessmentReport: "Assessment Report",
+        chiefComplaint: "Chief complaint",
+        yrs: "yrs",
+        viewDetails: "View details",
+        deleteRecord: "Delete record",
+        unknown: "Unknown",
+        noRecordsTitle: "No assessments yet",
+        noRecordsDesc: "Completed assessments will appear here for future reference.",
+        startAssessment: "Start an Assessment"
       }
     }
   },
@@ -85,6 +153,37 @@ const resources = {
       header: {
         title: "ডাক্তার আঙ্কেল",
         subtitle: "এআই স্বাস্থ্য সহকারী",
+      },
+      landingPage: {
+        badge: "পরিবারের জন্য এআই ট্রায়াজ",
+        title: "আপনার বিশ্বস্ত 'ডাক্তার আঙ্কেল' – এখন এআই চালিত",
+        subtitle: "আপনার প্রয়োজন অনুযায়ী যেকোনো সময়, নিজ ঘরের স্বাচ্ছন্দ্যে প্রাথমিক চিকিৎসা ট্রায়াজ এবং নির্দেশিত পরামর্শ পান।",
+        ctaButton: "ডাক্তার আঙ্কেলের সাথে চ্যাট করুন",
+        traditionTitle: "সেবার ঐতিহ্য",
+        traditionText: "প্রতিটি বাংলাদেশি পরিবারেই একজন 'ডাক্তার আঙ্কেল' থাকেন—যে আত্মীয়কে শিশু থেকে বয়স্ক কারোর জ্বর বা অসুস্থতায় সবাই প্রথমে কল দেন। আমরা আপনার ফোনে সেই একই উষ্ণতা, ধৈর্য এবং জ্ঞান নিয়ে এসেছি।",
+        traditionQuote: "\"আঙ্কেল, ছোট রাহুলের কাশি হয়েছে...\" পরিবারের মতোই আমরা আপনার কথা শুনি, তবে উন্নত এআই মেডিকেল লজিকের নিখুঁততার সাথে।",
+        howItWorksTitle: "এটি যেভাবে কাজ করে",
+        step1Title: "আপনি কেমন বোধ করছেন তা বলুন",
+        step1Desc: "একটি স্বাভাবিক কথোপকথনের মতোই আপনার নিজের ভাষায় উপসর্গ বর্ণনা করুন।",
+        step2Title: "নির্দেশিত প্রশ্নের উত্তর দিন",
+        step2Desc: "তীব্রতা ও অবস্থা বুঝতে ডাক্তার আঙ্কেল নির্দিষ্ট ফলো-আপ প্রশ্ন করবেন।",
+        step3Title: "কাঠামোগত পরামর্শ পান",
+        step3Desc: "স্পষ্ট ওভার-দ্য-কাউন্টার (OTC) ওষুধের পরামর্শ, বিশেষজ্ঞের প্রয়োজনীয়তা বা জরুরি সতর্কতা পান।",
+        bannerTag: "মেডিকেল লজিক। পারিবারিক উষ্ণতা।",
+        disclaimerTitle: "মেডিকেল ডিসক্লেইমার",
+        disclaimerText: "ডাক্তার আঙ্কেল এআই ট্রায়াজের জন্য একটি সিদ্ধান্ত সহায়তা টুল। এটি পেশাদার চিকিৎসা পরামর্শ, রোগ নির্ণয় বা চিকিৎসার বিকল্প নয়। জীবনঘাতী জরুরি পরিস্থিতিতে অনুগ্রহ করে অবিলম্বে নিকটস্থ হাসপাতালে যোগাযোগ করুন।",
+        nav: {
+          home: "হোম",
+          triage: "স্বাস্থ্য পরীক্ষা",
+          history: "ইতিহাস",
+          profile: "প্রোফাইল"
+        },
+        footer: {
+          privacy: "গোপনীয়তা নীতি",
+          terms: "সেবার শর্তাবলী",
+          disclaimer: "এআই ডিসক্লেইমার",
+          contact: "সহায়তা"
+        }
       },
       index: {
         assessmentReady: "আপনার মূল্যায়ন প্রস্তুত",
@@ -137,6 +236,17 @@ const resources = {
       specialist: {
         title: "বিশেষজ্ঞের সুপারিশ"
       },
+      intake: {
+        askName: "হ্যালো! আমি ডাক্তার আঙ্কেল। 👨‍⚕️ আপনার স্বাস্থ্য পরীক্ষা শুরু করার আগে, আমি কি আপনার পুরো নাম জানতে পারি?",
+        placeholderName: "আপনার পুরো নাম লিখুন (যেমন, রাহুল আহমেদ)...",
+        askAge: "আপনার সাথে পরিচিত হয়ে ভালো লাগলো, {{name}}! আপনার বয়স কত?",
+        placeholderAge: "আপনার বয়স লিখুন (বছরে)...",
+        ageOptions: ["১৮-৩০", "৩১-৪৫", "৪৬-৬০", "৬০ এর বেশি"],
+        askGender: "আপনার লিঙ্গ কোনটি?",
+        genderOptions: ["পুরুষ", "নারী", "অন্যান্য"],
+        askSymptom: "ধন্যবাদ, {{name}}। এখন অনুগ্রহ করে আপনার স্বাস্থ্য সমস্যা বা উপসর্গগুলি বিস্তারিতভাবে বলুন।",
+        placeholderSymptom: "আপনার উপসর্গ বিস্তারিত বর্ণনা করুন... (যেমন, 'আমার ২ দিন ধরে তীব্র মাথাব্যথা এবং জ্বর')"
+      },
       aiMessages: {
         greetings: [
           "হ্যালো! আমি ডাক্তার আঙ্কেল, আপনার বন্ধু সুলভ স্বাস্থ্য সহকারী। 👨‍⚕️",
@@ -155,6 +265,32 @@ const resources = {
           diagnosisTitle: "নির্ণয় ত্রুটি",
           diagnosisDesc: "ব্যাকএন্ড থেকে রোগ নির্ণয় তথ্য পেতে ব্যর্থ হয়েছে।"
         }
+      },
+      chatPage: {
+        patientLabel: "রোগী",
+        yrs: "বছর"
+      },
+      historyPage: {
+        title: "মূল্যায়নের ইতিহাস",
+        backToHistory: "ইতিহাসে ফিরুন",
+        downloadPdf: "পিডিএফ ডাউনলোড করুন",
+        delete: "মুছুন",
+        cancel: "বাতিল",
+        clearAll: "সব মুছুন",
+        deleteTitle: "মূল্যায়ন মুছবেন?",
+        deleteDesc: "এটি ইতিহাস থেকে {{name}} এর মূল্যায়ন স্থায়ীভাবে সরিয়ে দেবে। এই ক্রিয়াটি পূর্বাবস্থায় ফেরানো যাবে না।",
+        deleteDescGeneric: "এটি এই মূল্যায়ন রেকর্ডটি স্থায়ীভাবে সরিয়ে দেবে। এই ক্রিয়াটি পূর্বাবস্থায় ফেরানো যাবে না।",
+        clearTitle: "সব ইতিহাস মুছবেন?",
+        clearDesc: "এটি সমস্ত {{count}}টি মূল্যায়ন রেকর্ড স্থায়ীভাবে মুছে দেবে। এটি পূর্বাবস্থায় ফেরানো যাবে না।",
+        assessmentReport: "মূল্যায়ন প্রতিবেদন",
+        chiefComplaint: "প্রধান অভিযোগ",
+        yrs: "বছর",
+        viewDetails: "বিস্তারিত দেখুন",
+        deleteRecord: "রেকর্ড মুছুন",
+        unknown: "অজানা",
+        noRecordsTitle: "এখনও কোনো মূল্যায়ন নেই",
+        noRecordsDesc: "সম্পন্ন মূল্যায়নগুলি ভবিষ্যতে এখানে দেখা যাবে।",
+        startAssessment: "একটি মূল্যায়ন শুরু করুন"
       }
     }
   }
