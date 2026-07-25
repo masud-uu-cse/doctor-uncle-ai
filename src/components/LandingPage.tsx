@@ -38,14 +38,20 @@ export const LandingPage = () => {
           </p>
 
           {/* CTA Button */}
-          <Button
-            onClick={handleStartChat}
-            size="lg"
-            className="rounded-full px-8 py-6 text-base font-semibold bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 text-white shadow-lg hover:shadow-teal-500/25 transition-all duration-200 group gap-3"
-          >
-            <span>{t('landingPage.ctaButton')}</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
+          <div className="relative group inline-block my-2">
+            {/* Glowing Aura Effect */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 via-emerald-400 to-teal-600 rounded-full blur-md opacity-75 group-hover:opacity-100 transition duration-500 group-hover:duration-200 animate-pulse" />
+            
+            <Button
+              onClick={handleStartChat}
+              size="lg"vector
+              className="relative rounded-full px-9 py-7 text-base md:text-lg font-bold tracking-wide bg-gradient-to-r from-teal-700 via-emerald-700 to-teal-800 hover:from-teal-600 hover:to-emerald-600 dark:from-teal-500 dark:via-emerald-600 dark:to-teal-600 dark:hover:from-teal-400 dark:hover:to-emerald-500 text-white border-2 border-white/30 dark:border-teal-300/30 shadow-2xl hover:scale-105 transition-all duration-300 group/btn flex items-center gap-3"
+            >
+              <Stethoscope className="w-6 h-6 text-teal-200 dark:text-teal-100 group-hover/btn:rotate-12 transition-transform duration-300" />
+              <span>{t('landingPage.ctaButton')}</span>
+              <ArrowRight className="w-6 h-6 text-white group-hover/btn:translate-x-1.5 transition-transform duration-300" />
+            </Button>
+          </div>
 
           {/* Doctor Hero Image Card */}
           <div className="w-full max-w-xl mt-6 rounded-3xl overflow-hidden shadow-2xl border-4 border-card dark:border-slate-800 bg-card">
@@ -196,11 +202,12 @@ export const LandingPage = () => {
       </footer>
 
       {/* Floating Action Button (FAB) for mobile/desktop */}
-      <div className="fixed bottom-20 md:bottom-6 right-5 z-40">
+      <div className="fixed bottom-20 md:bottom-6 right-5 z-40 group">
+        <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 to-emerald-400 rounded-full blur-md opacity-75 group-hover:opacity-100 transition animate-pulse" />
         <Button
           onClick={handleStartChat}
           size="icon"
-          className="w-14 h-14 rounded-full bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 text-white shadow-xl hover:scale-105 transition-all duration-200"
+          className="relative w-14 h-14 rounded-full bg-gradient-to-r from-teal-700 via-emerald-700 to-teal-800 hover:from-teal-600 hover:to-emerald-600 dark:from-teal-500 dark:to-emerald-500 text-white shadow-2xl hover:scale-110 transition-all duration-300 border-2 border-white/30"
           title={t('landingPage.ctaButton')}
         >
           <MessageSquare className="w-6 h-6" />
