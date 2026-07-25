@@ -106,7 +106,7 @@ export const useSymptomChat = () => {
         variant: "destructive"
       });
     }
-  }, [addMessage, simulateTyping, toast]);
+  }, [addMessage, simulateTyping, toast, i18n.language, t]);
 
   const answerQuestion = useCallback(async (answer: string) => {
     addMessage('user', answer);
@@ -157,10 +157,10 @@ export const useSymptomChat = () => {
 
         // Map backend schema to frontend HealthResult
         const mappedResult: HealthResult = {
-          possibleCauses: diagnosisData.possibleConditions?.map((c: any) => `${c.name}: ${c.description}`) || [],
+          possibleCauses: diagnosisData.possibleConditions?.map((c: { name: string; description: string }) => `${c.name}: ${c.description}`) || [],
           triageLevel: (diagnosisData.severity?.level?.toLowerCase() === 'severe' ? 'severe' : 
                        (diagnosisData.severity?.level?.toLowerCase() === 'mild' ? 'mild' : 'moderate')) as TriageLevel,
-          medicines: diagnosisData.whatYouCanDoNow?.medicines?.map((m: any) => ({
+          medicines: diagnosisData.whatYouCanDoNow?.medicines?.map((m: { name: string; usage: string }) => ({
             name: m.name,
             dosage: 'As directed',
             frequency: 'As needed',
@@ -199,7 +199,7 @@ export const useSymptomChat = () => {
         });
       }
     }
-  }, [currentQuestionIndex, questions, userAnswers, addMessage, simulateTyping, session.initialSymptom, toast]);
+  }, [currentQuestionIndex, questions, userAnswers, addMessage, simulateTyping, session.initialSymptom, toast, i18n.language, t]);
 
   const resetSession = useCallback(() => {
     setSession({

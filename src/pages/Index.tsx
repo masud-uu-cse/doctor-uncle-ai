@@ -1,5 +1,5 @@
 import { Header } from '@/components/Header';
-import { SymptomInput } from '@/components/SymptomInput';
+import { LandingPage } from '@/components/LandingPage';
 import { ChatHistory } from '@/components/ChatHistory';
 import { QuestionFlow } from '@/components/QuestionFlow';
 import { TriageResultCard } from '@/components/TriageResultCard';
@@ -10,6 +10,8 @@ import { NextStepsCard } from '@/components/NextStepsCard';
 import { useSymptomChat } from '@/hooks/useSymptomChat';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/ui/button';
+import { RotateCcw } from 'lucide-react';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -24,72 +26,83 @@ const Index = () => {
   } = useSymptomChat();
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
       <Header />
       
-      <main className="flex-1 container max-w-2xl py-6 px-4">
-        {/* Input Screen */}
-        {session.status === 'input' && (
-          <SymptomInput onSubmit={startAssessment} />
-        )}
-
-        {/* Chat/Questioning Screen */}
-        {session.status === 'questioning' && (
-          <div className="flex flex-col h-[calc(100vh-180px)]">
-            <ScrollArea className="flex-1 pr-4">
-              <ChatHistory messages={session.messages} />
-            </ScrollArea>
-            
-            <div className="pt-4 border-t border-border mt-4">
-              <QuestionFlow
-                currentQuestion={currentQuestion}
-                options={currentOptions}
-                onAnswer={answerQuestion}
-                isTyping={isTyping}
-              />
-            </div>
+      {session.status === 'input' ? (
+        <LandingPage onStartAssessment={startAssessment} />
+      ) : (
+        <main className="flex-1 container max-w-2xl py-6 px-4">
+          <div className="flex justify-between items-center mb-4">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={resetSession}
+              className="gap-2 text-xs font-medium border-border"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>{t('nextSteps.startNew')}</span>
+            </Button>
           </div>
-        )}
 
-        {/* Results Screen */}
-        {session.status === 'complete' && session.result && (
-          <div className="space-y-6">
-            {/* Doctor Uncle's Summary */}
-            <div className="flex items-start gap-3 p-4 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary animate-fade-in-up">
-              <span className="text-3xl">👨‍⚕️</span>
-              <div>
-                <h2 className="font-bold text-lg text-foreground">
-                  {t('index.assessmentReady')}
-                </h2>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {t('index.assessmentBasedOn', { symptom: session.initialSymptom })}
-                </p>
+          {/* Chat/Questioning Screen */}
+          {session.status === 'questioning' && (
+            <div className="flex flex-col h-[calc(100vh-200px)] bg-card rounded-2xl border border-border p-4 shadow-sm">
+              <ScrollArea className="flex-1 pr-4">
+                <ChatHistory messages={session.messages} />
+              </ScrollArea>
+              
+              <div className="pt-4 border-t border-border mt-4">
+                <QuestionFlow
+                  currentQuestion={currentQuestion}
+                  options={currentOptions}
+                  onAnswer={answerQuestion}
+                  isTyping={isTyping}
+                />
               </div>
             </div>
+          )}
 
-            <TriageResultCard
-              level={session.result.triageLevel}
-              possibleCauses={session.result.possibleCauses}
-            />
+          {/* Results Screen */}
+          {session.status === 'complete' && session.result && (
+            <div className="space-y-6 animate-fade-in-up">
+              {/* Doctor Uncle's Summary */}
+              <div className="flex items-start gap-3 p-4 rounded-2xl bg-gradient-to-br from-teal-500/10 via-primary/10 to-secondary border border-teal-500/20">
+                <span className="text-3xl">👨‍⚕️</span>
+                <div>
+                  <h2 className="font-bold text-lg text-foreground">
+                    {t('index.assessmentReady')}
+                  </h2>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    {t('index.assessmentBasedOn', { symptom: session.initialSymptom })}
+                  </p>
+                </div>
+              </div>
 
-            <MedicineSuggestionCard medicines={session.result.medicines} />
+              <TriageResultCard
+                level={session.result.triageLevel}
+                possibleCauses={session.result.possibleCauses}
+              />
 
-            <HomeRemediesCard remedies={session.result.homeRemedies} />
+              <MedicineSuggestionCard medicines={session.result.medicines} />
 
-            <SpecialistRecommendation specialist={session.result.specialist} />
+              <HomeRemediesCard remedies={session.result.homeRemedies} />
 
-            <NextStepsCard
-              steps={session.result.nextSteps}
-              onStartOver={resetSession}
-            />
+              <SpecialistRecommendation specialist={session.result.specialist} />
 
-            {/* Final Disclaimer */}
-            <p className="text-xs text-muted-foreground text-center px-4 pb-8">
-              {t('index.disclaimer')}
-            </p>
-          </div>
-        )}
-      </main>
+              <NextStepsCard
+                steps={session.result.nextSteps}
+                onStartOver={resetSession}
+              />
+
+              {/* Final Disclaimer */}
+              <p className="text-xs text-muted-foreground text-center px-4 pb-8">
+                {t('index.disclaimer')}
+              </p>
+            </div>
+          )}
+        </main>
+      )}
     </div>
   );
 };
