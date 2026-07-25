@@ -59,6 +59,17 @@ const resources = {
       specialist: {
         title: "Specialist Recommendation"
       },
+      intake: {
+        askName: "Hello! I'm Doctor Uncle. 👨‍⚕️ Before we begin your health checkup, may I please have your full name?",
+        placeholderName: "Enter your full name (e.g., Rahul Ahmed)...",
+        askAge: "Nice to meet you, {{name}}! How old are you?",
+        placeholderAge: "Enter your age in years...",
+        ageOptions: ["18-30", "31-45", "46-60", "Over 60"],
+        askGender: "What is your gender?",
+        genderOptions: ["Male", "Female", "Other"],
+        askSymptom: "Thank you, {{name}}. Now please describe what health problem or symptoms you are experiencing in detail.",
+        placeholderSymptom: "Describe symptoms in detail... (e.g., 'I've had severe headache and fever for 2 days')"
+      },
       landingPage: {
         badge: "AI TRIAGE FOR FAMILIES",
         title: "Your Trusted 'Doctor Uncle' – Now AI Powered",
@@ -198,6 +209,17 @@ const resources = {
       },
       specialist: {
         title: "বিশেষজ্ঞের সুপারিশ"
+      },
+      intake: {
+        askName: "হ্যালো! আমি ডাক্তার আঙ্কেল। 👨‍⚕️ আপনার স্বাস্থ্য পরীক্ষা শুরু করার আগে, আমি কি আপনার পুরো নাম জানতে পারি?",
+        placeholderName: "আপনার পুরো নাম লিখুন (যেমন, রাহুল আহমেদ)...",
+        askAge: "আপনার সাথে পরিচিত হয়ে ভালো লাগলো, {{name}}! আপনার বয়স কত?",
+        placeholderAge: "আপনার বয়স লিখুন (বছরে)...",
+        ageOptions: ["১৮-৩০", "৩১-৪৫", "৪৬-৬০", "৬০ এর বেশি"],
+        askGender: "আপনার লিঙ্গ কোনটি?",
+        genderOptions: ["পুরুষ", "নারী", "অন্যান্য"],
+        askSymptom: "ধন্যবাদ, {{name}}। এখন অনুগ্রহ করে আপনার স্বাস্থ্য সমস্যা বা উপসর্গগুলি বিস্তারিতভাবে বলুন।",
+        placeholderSymptom: "আপনার উপসর্গ বিস্তারিত বর্ণনা করুন... (যেমন, 'আমার ২ দিন ধরে তীব্র মাথাব্যথা এবং জ্বর')"
       },
       aiMessages: {
         greetings: [

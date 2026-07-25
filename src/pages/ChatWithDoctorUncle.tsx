@@ -1,5 +1,4 @@
 import { Header } from '@/components/Header';
-import { SymptomInput } from '@/components/SymptomInput';
 import { ChatHistory } from '@/components/ChatHistory';
 import { QuestionFlow } from '@/components/QuestionFlow';
 import { TriageResultCard } from '@/components/TriageResultCard';
@@ -22,7 +21,7 @@ const ChatWithDoctorUncle = () => {
     isTyping,
     currentQuestion,
     currentOptions,
-    startAssessment,
+    inputPlaceholder,
     answerQuestion,
     resetSession
   } = useSymptomChat();
@@ -32,7 +31,7 @@ const ChatWithDoctorUncle = () => {
       <Header />
       
       <main className="flex-1 container max-w-2xl py-6 px-4">
-        {session.status !== 'input' && (
+        {session.status === 'complete' && (
           <div className="flex justify-between items-center mb-4">
             <Button
               variant="outline"
@@ -46,16 +45,9 @@ const ChatWithDoctorUncle = () => {
           </div>
         )}
 
-        {/* Input Screen */}
-        {session.status === 'input' && (
-          <div className="animate-fade-in-up">
-            <SymptomInput onSubmit={startAssessment} />
-          </div>
-        )}
-
-        {/* Chat/Questioning Screen */}
-        {session.status === 'questioning' && (
-          <div className="flex flex-col h-[calc(100vh-220px)] bg-card rounded-2xl border border-border p-4 shadow-sm animate-fade-in-up">
+        {/* Chat Conversation Intake / Follow-up Screen */}
+        {session.status !== 'complete' && (
+          <div className="flex flex-col h-[calc(100vh-180px)] bg-card rounded-2xl border border-border p-4 shadow-sm animate-fade-in-up">
             <ScrollArea className="flex-1 pr-4">
               <ChatHistory messages={session.messages} />
             </ScrollArea>
@@ -64,6 +56,7 @@ const ChatWithDoctorUncle = () => {
               <QuestionFlow
                 currentQuestion={currentQuestion}
                 options={currentOptions}
+                placeholder={inputPlaceholder}
                 onAnswer={answerQuestion}
                 isTyping={isTyping}
               />
@@ -84,6 +77,11 @@ const ChatWithDoctorUncle = () => {
                 <p className="text-sm text-muted-foreground mt-1">
                   {t('index.assessmentBasedOn', { symptom: session.initialSymptom })}
                 </p>
+                {session.patientInfo.name && (
+                  <p className="text-xs text-teal-600 dark:text-teal-400 font-semibold mt-1">
+                    👤 Patient: {session.patientInfo.name} ({session.patientInfo.age} yrs, {session.patientInfo.gender})
+                  </p>
+                )}
               </div>
             </div>
 
