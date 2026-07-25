@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Header } from '@/components/Header';
 import { useHistory, AssessmentRecord } from '@/hooks/useHistory';
 import { TriageResultCard } from '@/components/TriageResultCard';
@@ -7,7 +8,6 @@ import { MedicineSuggestionCard } from '@/components/MedicineSuggestionCard';
 import { HomeRemediesCard } from '@/components/HomeRemediesCard';
 import { SpecialistRecommendation } from '@/components/SpecialistRecommendation';
 import { NextStepsCard } from '@/components/NextStepsCard';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import {
   AlertDialog,
@@ -70,6 +70,7 @@ interface HistoryCardProps {
 }
 
 const HistoryCard = ({ record, onSelect, onDelete }: HistoryCardProps) => {
+  const { t } = useTranslation();
   const level = record.result.triageLevel;
   const badge = severityColor[level] ?? severityColor.moderate;
 
@@ -92,10 +93,10 @@ const HistoryCard = ({ record, onSelect, onDelete }: HistoryCardProps) => {
         <div className="flex items-center gap-1.5 mb-1.5">
           <User className="w-3.5 h-3.5 text-teal-500" />
           <span className="text-sm font-semibold text-foreground truncate">
-            {record.patientInfo.name || 'Unknown'}
+            {record.patientInfo.name || t('historyPage.unknown')}
           </span>
           {record.patientInfo.age && (
-            <span className="text-xs text-muted-foreground">· {record.patientInfo.age} yrs</span>
+            <span className="text-xs text-muted-foreground">· {record.patientInfo.age} {t('historyPage.yrs')}</span>
           )}
           {record.patientInfo.gender && (
             <span className="text-xs text-muted-foreground">· {record.patientInfo.gender}</span>
@@ -104,7 +105,7 @@ const HistoryCard = ({ record, onSelect, onDelete }: HistoryCardProps) => {
 
         {/* Symptom */}
         <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
-          <span className="font-medium text-foreground/70">Chief complaint: </span>
+          <span className="font-medium text-foreground/70">{t('historyPage.chiefComplaint')}: </span>
           {record.initialSymptom}
         </p>
       </div>
@@ -116,27 +117,25 @@ const HistoryCard = ({ record, onSelect, onDelete }: HistoryCardProps) => {
             <button
               className="p-1.5 rounded-lg text-muted-foreground hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors"
               onClick={(e) => e.stopPropagation()}
-              title="Delete record"
+              title={t('historyPage.deleteRecord')}
             >
               <Trash2 className="w-4 h-4" />
             </button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Delete assessment?</AlertDialogTitle>
+              <AlertDialogTitle>{t('historyPage.deleteTitle')}</AlertDialogTitle>
               <AlertDialogDescription>
-                This will permanently remove{' '}
-                <strong>{record.patientInfo.name || 'this'}</strong>'s assessment from history. This
-                action cannot be undone.
+                {t('historyPage.deleteDesc', { name: record.patientInfo.name || t('historyPage.unknown') })}
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogCancel>{t('historyPage.cancel')}</AlertDialogCancel>
               <AlertDialogAction
                 className="bg-red-600 hover:bg-red-700"
                 onClick={onDelete}
               >
-                Delete
+                {t('historyPage.delete')}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
@@ -145,7 +144,7 @@ const HistoryCard = ({ record, onSelect, onDelete }: HistoryCardProps) => {
         <button
           className="p-1.5 rounded-lg text-muted-foreground hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors"
           onClick={onSelect}
-          title="View details"
+          title={t('historyPage.viewDetails')}
         >
           <ChevronRight className="w-4 h-4" />
         </button>
@@ -163,90 +162,95 @@ interface DetailViewProps {
   onDelete: () => void;
 }
 
-const DetailView = ({ record, onBack, onDelete }: DetailViewProps) => (
-  <div className="space-y-6 animate-fade-in-up">
-    {/* Top bar */}
-    <div className="flex items-center justify-between gap-2">
-      <Button variant="ghost" size="sm" onClick={onBack} className="gap-2 -ml-2">
-        <ArrowLeft className="w-4 h-4" />
-        Back to History
-      </Button>
+const DetailView = ({ record, onBack, onDelete }: DetailViewProps) => {
+  const { t } = useTranslation();
 
-      <div className="flex items-center gap-2">
-        {/* Download PDF */}
-        <Button
-          variant="outline"
-          size="sm"
-          className="gap-2 text-teal-600 border-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/30"
-          onClick={() => downloadAssessmentPDF(record)}
-        >
-          <Download className="w-3.5 h-3.5" />
-          Download PDF
+  return (
+    <div className="space-y-6 animate-fade-in-up">
+      {/* Top bar */}
+      <div className="flex items-center justify-between gap-2">
+        <Button variant="ghost" size="sm" onClick={onBack} className="gap-2 -ml-2">
+          <ArrowLeft className="w-4 h-4" />
+          {t('historyPage.backToHistory')}
         </Button>
 
-        {/* Delete */}
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button variant="outline" size="sm" className="gap-2 text-red-500 border-red-300 hover:bg-red-50 dark:hover:bg-red-900/30">
-              <Trash2 className="w-3.5 h-3.5" />
-              Delete
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Delete assessment?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This will permanently remove this assessment record. This action cannot be undone.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction className="bg-red-600 hover:bg-red-700" onClick={onDelete}>
-                Delete
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </div>
-    </div>
+        <div className="flex items-center gap-2">
+          {/* Download PDF */}
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-2 text-teal-600 border-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/30"
+            onClick={() => downloadAssessmentPDF(record)}
+          >
+            <Download className="w-3.5 h-3.5" />
+            {t('historyPage.downloadPdf')}
+          </Button>
 
-    {/* Summary header */}
-    <div className="flex items-start gap-3 p-4 rounded-2xl bg-gradient-to-br from-teal-500/10 via-primary/10 to-secondary border border-teal-500/20">
-      <span className="text-3xl">👨‍⚕️</span>
-      <div className="flex-1 min-w-0">
-        <h2 className="font-bold text-lg text-foreground">Assessment Report</h2>
-        <p className="text-sm text-muted-foreground mt-0.5 line-clamp-2">
-          <span className="font-medium">Chief complaint: </span>
-          {record.initialSymptom}
-        </p>
-        <div className="flex flex-wrap gap-3 mt-2 text-xs text-teal-600 dark:text-teal-400 font-semibold">
-          <span className="flex items-center gap-1"><User className="w-3 h-3" /> {record.patientInfo.name}</span>
-          {record.patientInfo.age && <span>· {record.patientInfo.age} yrs</span>}
-          {record.patientInfo.gender && <span>· {record.patientInfo.gender}</span>}
+          {/* Delete */}
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="outline" size="sm" className="gap-2 text-red-500 border-red-300 hover:bg-red-50 dark:hover:bg-red-900/30">
+                <Trash2 className="w-3.5 h-3.5" />
+                {t('historyPage.delete')}
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>{t('historyPage.deleteTitle')}</AlertDialogTitle>
+                <AlertDialogDescription>
+                  {t('historyPage.deleteDescGeneric')}
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>{t('historyPage.cancel')}</AlertDialogCancel>
+                <AlertDialogAction className="bg-red-600 hover:bg-red-700" onClick={onDelete}>
+                  {t('historyPage.delete')}
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
-        <p className="mt-1 text-[11px] text-muted-foreground flex items-center gap-1">
-          <Calendar className="w-3 h-3" />
-          {formatDate(record.createdAt)}
-        </p>
       </div>
-    </div>
 
-    <TriageResultCard
-      level={record.result.triageLevel}
-      possibleCauses={record.result.possibleCauses}
-    />
-    <MedicineSuggestionCard medicines={record.result.medicines} />
-    <HomeRemediesCard remedies={record.result.homeRemedies} />
-    <SpecialistRecommendation specialist={record.result.specialist} />
-    <NextStepsCard steps={record.result.nextSteps} onStartOver={onBack} />
-  </div>
-);
+      {/* Summary header */}
+      <div className="flex items-start gap-3 p-4 rounded-2xl bg-gradient-to-br from-teal-500/10 via-primary/10 to-secondary border border-teal-500/20">
+        <span className="text-3xl">👨‍⚕️</span>
+        <div className="flex-1 min-w-0">
+          <h2 className="font-bold text-lg text-foreground">{t('historyPage.assessmentReport')}</h2>
+          <p className="text-sm text-muted-foreground mt-0.5 line-clamp-2">
+            <span className="font-medium">{t('historyPage.chiefComplaint')}: </span>
+            {record.initialSymptom}
+          </p>
+          <div className="flex flex-wrap gap-3 mt-2 text-xs text-teal-600 dark:text-teal-400 font-semibold">
+            <span className="flex items-center gap-1"><User className="w-3 h-3" /> {record.patientInfo.name}</span>
+            {record.patientInfo.age && <span>· {record.patientInfo.age} {t('historyPage.yrs')}</span>}
+            {record.patientInfo.gender && <span>· {record.patientInfo.gender}</span>}
+          </div>
+          <p className="mt-1 text-[11px] text-muted-foreground flex items-center gap-1">
+            <Calendar className="w-3 h-3" />
+            {formatDate(record.createdAt)}
+          </p>
+        </div>
+      </div>
+
+      <TriageResultCard
+        level={record.result.triageLevel}
+        possibleCauses={record.result.possibleCauses}
+      />
+      <MedicineSuggestionCard medicines={record.result.medicines} />
+      <HomeRemediesCard remedies={record.result.homeRemedies} />
+      <SpecialistRecommendation specialist={record.result.specialist} />
+      <NextStepsCard steps={record.result.nextSteps} onStartOver={onBack} />
+    </div>
+  );
+};
 
 // ─────────────────────────────────────────────
 // Main Page
 // ─────────────────────────────────────────────
 const HistoryPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { records, deleteRecord, clearAll } = useHistory();
   const [selected, setSelected] = useState<AssessmentRecord | null>(null);
 
@@ -272,7 +276,7 @@ const HistoryPage = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <ClipboardList className="w-5 h-5 text-teal-500" />
-                <h1 className="text-xl font-bold text-foreground">Assessment History</h1>
+                <h1 className="text-xl font-bold text-foreground">{t('historyPage.title')}</h1>
                 {records.length > 0 && (
                   <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-teal-500/15 text-teal-600 dark:text-teal-400 border border-teal-500/30">
                     {records.length}
@@ -285,21 +289,20 @@ const HistoryPage = () => {
                   <AlertDialogTrigger asChild>
                     <Button variant="outline" size="sm" className="gap-1.5 text-xs text-red-500 border-red-300 hover:bg-red-50 dark:hover:bg-red-900/30">
                       <Trash2 className="w-3.5 h-3.5" />
-                      Clear all
+                      {t('historyPage.clearAll')}
                     </Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>Clear all history?</AlertDialogTitle>
+                      <AlertDialogTitle>{t('historyPage.clearTitle')}</AlertDialogTitle>
                       <AlertDialogDescription>
-                        This will permanently delete all {records.length} assessment records. This
-                        cannot be undone.
+                        {t('historyPage.clearDesc', { count: records.length })}
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogCancel>{t('historyPage.cancel')}</AlertDialogCancel>
                       <AlertDialogAction className="bg-red-600 hover:bg-red-700" onClick={clearAll}>
-                        Clear all
+                        {t('historyPage.clearAll')}
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
@@ -314,9 +317,9 @@ const HistoryPage = () => {
                   <AlertTriangle className="w-10 h-10 text-teal-400" />
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground">No assessments yet</p>
+                  <p className="font-semibold text-foreground">{t('historyPage.noRecordsTitle')}</p>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Completed assessments will appear here for future reference.
+                    {t('historyPage.noRecordsDesc')}
                   </p>
                 </div>
                 <Button
@@ -324,7 +327,7 @@ const HistoryPage = () => {
                   onClick={() => navigate('/doctor-uncle')}
                 >
                   <Stethoscope className="w-4 h-4" />
-                  Start an Assessment
+                  {t('historyPage.startAssessment')}
                 </Button>
               </div>
             )}

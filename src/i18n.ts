@@ -90,7 +90,7 @@ const resources = {
         disclaimerText: "Doctor Uncle AI is a decision support tool for triage. It is not a replacement for a professional medical consultation, diagnosis, or treatment. In case of a life-threatening emergency, please visit the nearest hospital immediately.",
         nav: {
           home: "Home",
-          triage: "Triage",
+          triage: "Check Up",
           history: "History",
           profile: "Profile"
         },
@@ -103,14 +103,14 @@ const resources = {
       },
       aiMessages: {
         greetings: [
-          "Hello there! I'm Doctor Uncle, your friendly health assistant. 👨‍⚕️",
+          "Hello there! I'm Doctor Uncle, your friendly health assistant. \uD83D\uDC68\u200D\u2695\uFE0F",
           "Don't worry, you're in good hands. Let me ask you a few questions to better understand how you're feeling.",
           "Remember, I'm here to guide you – but always consult a real doctor for serious concerns!"
         ],
         closing: [
           "Based on our conversation, I've prepared a comprehensive assessment for you.",
           "Remember, this is guidance only. If you feel your condition is serious, please seek immediate medical attention.",
-          "Take care of yourself! Your health is your greatest wealth. 💚"
+          "Take care of yourself! Your health is your greatest wealth. \uD83D\uDC9A"
         ],
         analyzing: "Thank you. I am analyzing your responses with my medical database to generate a detailed assessment...",
         errors: {
@@ -119,6 +119,32 @@ const resources = {
           diagnosisTitle: "Diagnosis Error",
           diagnosisDesc: "Could not retrieve diagnosis from backend."
         }
+      },
+      chatPage: {
+        patientLabel: "Patient",
+        yrs: "yrs"
+      },
+      historyPage: {
+        title: "Assessment History",
+        backToHistory: "Back to History",
+        downloadPdf: "Download PDF",
+        delete: "Delete",
+        cancel: "Cancel",
+        clearAll: "Clear all",
+        deleteTitle: "Delete assessment?",
+        deleteDesc: "This will permanently remove {{name}}'s assessment from history. This action cannot be undone.",
+        deleteDescGeneric: "This will permanently remove this assessment record. This action cannot be undone.",
+        clearTitle: "Clear all history?",
+        clearDesc: "This will permanently delete all {{count}} assessment records. This cannot be undone.",
+        assessmentReport: "Assessment Report",
+        chiefComplaint: "Chief complaint",
+        yrs: "yrs",
+        viewDetails: "View details",
+        deleteRecord: "Delete record",
+        unknown: "Unknown",
+        noRecordsTitle: "No assessments yet",
+        noRecordsDesc: "Completed assessments will appear here for future reference.",
+        startAssessment: "Start an Assessment"
       }
     }
   },
@@ -148,7 +174,7 @@ const resources = {
         disclaimerText: "ডাক্তার আঙ্কেল এআই ট্রায়াজের জন্য একটি সিদ্ধান্ত সহায়তা টুল। এটি পেশাদার চিকিৎসা পরামর্শ, রোগ নির্ণয় বা চিকিৎসার বিকল্প নয়। জীবনঘাতী জরুরি পরিস্থিতিতে অনুগ্রহ করে অবিলম্বে নিকটস্থ হাসপাতালে যোগাযোগ করুন।",
         nav: {
           home: "হোম",
-          triage: "ট্রায়াজ",
+          triage: "স্বাস্থ্য পরীক্ষা",
           history: "ইতিহাস",
           profile: "প্রোফাইল"
         },
@@ -239,6 +265,32 @@ const resources = {
           diagnosisTitle: "নির্ণয় ত্রুটি",
           diagnosisDesc: "ব্যাকএন্ড থেকে রোগ নির্ণয় তথ্য পেতে ব্যর্থ হয়েছে।"
         }
+      },
+      chatPage: {
+        patientLabel: "\u09b0\u09cb\u0997\u09c0",
+        yrs: "\u09ac\u099b\u09b0"
+      },
+      historyPage: {
+        title: "\u09ae\u09c2\u09b2\u09cd\u09af\u09be\u09af\u09bc\u09a8\u09c7\u09b0 \u0987\u09a4\u09bf\u09b9\u09be\u09b8",
+        backToHistory: "\u0987\u09a4\u09bf\u09b9\u09be\u09b8\u09c7 \u09ab\u09bf\u09b0\u09c1\u09a8",
+        downloadPdf: "\u09aa\u09bf\u09a1\u09bf\u098f\u09ab \u09a1\u09be\u0989\u09a8\u09b2\u09cb\u09a1 \u0995\u09b0\u09c1\u09a8",
+        delete: "\u09ae\u09c1\u099b\u09c1\u09a8",
+        cancel: "\u09ac\u09be\u09a4\u09bf\u09b2",
+        clearAll: "\u09b8\u09ac \u09ae\u09c1\u099b\u09c1\u09a8",
+        deleteTitle: "\u09ae\u09c2\u09b2\u09cd\u09af\u09be\u09af\u09bc\u09a8 \u09ae\u09c1\u099b\u09ac\u09c7\u09a8?",
+        deleteDesc: "\u098f\u099f\u09bf \u0987\u09a4\u09bf\u09b9\u09be\u09b8 \u09a5\u09c7\u0995\u09c7 {{name}} \u098f\u09b0 \u09ae\u09c2\u09b2\u09cd\u09af\u09be\u09af\u09bc\u09a8 \u09b8\u09cd\u09a5\u09be\u09af\u09bc\u09c0\u09ad\u09be\u09ac\u09c7 \u09b8\u09b0\u09bf\u09af\u09bc\u09c7 \u09a6\u09c7\u09ac\u09c7\u0964 \u098f\u0987 \u0995\u09cd\u09b0\u09bf\u09af\u09bc\u09be\u099f\u09bf \u09aa\u09c2\u09b0\u09cd\u09ac\u09be\u09ac\u09b8\u09cd\u09a5\u09be\u09af\u09bc \u09ab\u09c7\u09b0\u09be\u09a8\u09cb \u09af\u09be\u09ac\u09c7 \u09a8\u09be\u0964",
+        deleteDescGeneric: "\u098f\u099f\u09bf \u098f\u0987 \u09ae\u09c2\u09b2\u09cd\u09af\u09be\u09af\u09bc\u09a8 \u09b0\u09c7\u0995\u09b0\u09cd\u09a1\u099f\u09bf \u09b8\u09cd\u09a5\u09be\u09af\u09bc\u09c0\u09ad\u09be\u09ac\u09c7 \u09b8\u09b0\u09bf\u09af\u09bc\u09c7 \u09a6\u09c7\u09ac\u09c7\u0964 \u098f\u0987 \u0995\u09cd\u09b0\u09bf\u09af\u09bc\u09be\u099f\u09bf \u09aa\u09c2\u09b0\u09cd\u09ac\u09be\u09ac\u09b8\u09cd\u09a5\u09be\u09af\u09bc \u09ab\u09c7\u09b0\u09be\u09a8\u09cb \u09af\u09be\u09ac\u09c7 \u09a8\u09be\u0964",
+        clearTitle: "\u09b8\u09ac \u0987\u09a4\u09bf\u09b9\u09be\u09b8 \u09ae\u09c1\u099b\u09ac\u09c7\u09a8?",
+        clearDesc: "\u098f\u099f\u09bf \u09b8\u09ae\u09b8\u09cd\u09a4 {{count}}\u099f\u09bf \u09ae\u09c2\u09b2\u09cd\u09af\u09be\u09af\u09bc\u09a8 \u09b0\u09c7\u0995\u09b0\u09cd\u09a1 \u09b8\u09cd\u09a5\u09be\u09af\u09bc\u09c0\u09ad\u09be\u09ac\u09c7 \u09ae\u09c1\u099b\u09c7 \u09a6\u09c7\u09ac\u09c7\u0964 \u098f\u099f\u09bf \u09aa\u09c2\u09b0\u09cd\u09ac\u09be\u09ac\u09b8\u09cd\u09a5\u09be\u09af\u09bc \u09ab\u09c7\u09b0\u09be\u09a8\u09cb \u09af\u09be\u09ac\u09c7 \u09a8\u09be\u0964",
+        assessmentReport: "\u09ae\u09c2\u09b2\u09cd\u09af\u09be\u09af\u09bc\u09a8 \u09aa\u09cd\u09b0\u09a4\u09bf\u09ac\u09c7\u09a6\u09a8",
+        chiefComplaint: "\u09aa\u09cd\u09b0\u09a7\u09be\u09a8 \u0985\u09ad\u09bf\u09af\u09cb\u0997",
+        yrs: "\u09ac\u099b\u09b0",
+        viewDetails: "\u09ac\u09bf\u09b8\u09cd\u09a4\u09be\u09b0\u09bf\u09a4 \u09a6\u09c7\u0996\u09c1\u09a8",
+        deleteRecord: "\u09b0\u09c7\u0995\u09b0\u09cd\u09a1 \u09ae\u09c1\u099b\u09c1\u09a8",
+        unknown: "\u0985\u099c\u09be\u09a8\u09be",
+        noRecordsTitle: "\u098f\u0996\u09a8\u0993 \u0995\u09cb\u09a8\u09cb \u09ae\u09c2\u09b2\u09cd\u09af\u09be\u09af\u09bc\u09a8 \u09a8\u09c7\u0987",
+        noRecordsDesc: "\u09b8\u09ae\u09cd\u09aa\u09a8\u09cd\u09a8 \u09ae\u09c2\u09b2\u09cd\u09af\u09be\u09af\u09bc\u09a8\u0997\u09c1\u09b3\u09bf \u09ad\u09ac\u09bf\u09b7\u09cd\u09af\u09a4\u09c7 \u098f\u0996\u09be\u09a8\u09c7 \u09a6\u09c7\u0996\u09be \u09af\u09be\u09ac\u09c7\u0964",
+        startAssessment: "\u098f\u0995\u099f\u09bf \u09ae\u09c2\u09b2\u09cd\u09af\u09be\u09af\u09bc\u09a8 \u09b6\u09c1\u09b0\u09c1 \u0995\u09b0\u09c1\u09a8"
       }
     }
   }

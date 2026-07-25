@@ -78,7 +78,7 @@ const ChatWithDoctorUncle = () => {
                 </p>
                 {session.patientInfo.name && (
                   <p className="text-xs text-teal-600 dark:text-teal-400 font-semibold mt-1">
-                    👤 Patient: {session.patientInfo.name} ({session.patientInfo.age} yrs, {session.patientInfo.gender})
+                    👤 {t('chatPage.patientLabel')}: {session.patientInfo.name} ({session.patientInfo.age} {t('chatPage.yrs')}, {session.patientInfo.gender})
                   </p>
                 )}
               </div>
