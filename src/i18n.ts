@@ -60,15 +60,28 @@ const resources = {
         title: "Specialist Recommendation"
       },
       intake: {
-        askName: "Hello! I'm Doctor Uncle. 👨‍⚕️ Before we begin your health checkup, may I please have your full name?",
+        askName: "👋 Hello! I'm Doctor Uncle. \n\nI'll help you understand your symptoms by asking a few simple questions. \n\nThis assessment is for informational purposes and doesn't replace a licensed doctor. \n\nBefore we begin, what should I call you?",
         placeholderName: "Enter your full name (e.g., Rahul Ahmed)...",
         askAge: "Nice to meet you, {{name}}! How old are you?",
         placeholderAge: "Enter your age in years...",
         ageOptions: ["18-30", "31-45", "46-60", "Over 60"],
         askGender: "What is your gender?",
-        genderOptions: ["Male", "Female", "Other"],
+        genderOptions: ["Male", "Female", "Other", "Prefer not to say"],
         askSymptom: "Thank you, {{name}}. Now please describe what health problem or symptoms you are experiencing in detail.",
-        placeholderSymptom: "Describe symptoms in detail... (e.g., 'I've had severe headache and fever for 2 days')"
+        placeholderSymptom: "Describe symptoms in detail... (e.g., 'I've had severe headache and fever for 2 days')",
+        niceToMeetYou: "Nice to meet you, {{name}}! 😊\n\nCould you describe what health problem you're experiencing today?",
+        askAgeConversational: "Thank you for explaining that. To better understand your condition, I'd like to ask a few quick questions.\n\nHow old are you?",
+        emergencyWarning: "⚠️ These symptoms may require immediate medical attention. \n\nPlease contact your nearest emergency service or visit the nearest hospital immediately."
+      },
+      boolean: {
+        yes: "Yes",
+        no: "No"
+      },
+      validation: {
+        invalidName: "I'm sorry, that name seems invalid. Could you please share a valid name? (minimum 2 characters, letters only)",
+        invalidSymptom: "Could you describe your symptoms in a little more detail? (minimum 10 characters)",
+        invalidAge: "Please enter a valid age between 0 and 120.",
+        invalidGender: "Please select one of the available options."
       },
       landingPage: {
         badge: "AI TRIAGE FOR FAMILIES",
@@ -237,15 +250,28 @@ const resources = {
         title: "বিশেষজ্ঞের সুপারিশ"
       },
       intake: {
-        askName: "হ্যালো! আমি ডাক্তার আঙ্কেল। 👨‍⚕️ আপনার স্বাস্থ্য পরীক্ষা শুরু করার আগে, আমি কি আপনার পুরো নাম জানতে পারি?",
+        askName: "👋 হ্যালো! আমি ডাক্তার আঙ্কেল। \n\nআমি আপনাকে কিছু সহজ প্রশ্ন জিজ্ঞাসা করে আপনার উপসর্গগুলি বুঝতে সাহায্য করব। \n\nএই মূল্যায়নটি শুধুমাত্র তথ্যের উদ্দেশ্যে এবং এটি কোনো লাইসেন্সপ্রাপ্ত ডাক্তারের বিকল্প নয়। \n\nশুরু করার আগে, আমি আপনাকে কী নামে ডাকতে পারি?",
         placeholderName: "আপনার পুরো নাম লিখুন (যেমন, রাহুল আহমেদ)...",
         askAge: "আপনার সাথে পরিচিত হয়ে ভালো লাগলো, {{name}}! আপনার বয়স কত?",
         placeholderAge: "আপনার বয়স লিখুন (বছরে)...",
         ageOptions: ["১৮-৩০", "৩১-৪৫", "৪৬-৬০", "৬০ এর বেশি"],
         askGender: "আপনার লিঙ্গ কোনটি?",
-        genderOptions: ["পুরুষ", "নারী", "অন্যান্য"],
+        genderOptions: ["পুরুষ", "নারী", "অন্যান্য", "বলতে চাই না"],
         askSymptom: "ধন্যবাদ, {{name}}। এখন অনুগ্রহ করে আপনার স্বাস্থ্য সমস্যা বা উপসর্গগুলি বিস্তারিতভাবে বলুন।",
-        placeholderSymptom: "আপনার উপসর্গ বিস্তারিত বর্ণনা করুন... (যেমন, 'আমার ২ দিন ধরে তীব্র মাথাব্যথা এবং জ্বর')"
+        placeholderSymptom: "আপনার উপসর্গ বিস্তারিত বর্ণনা করুন... (যেমন, 'আমার ২ দিন ধরে তীব্র মাথাব্যথা এবং জ্বর')",
+        niceToMeetYou: "আপনার সাথে পরিচিত হয়ে ভালো লাগলো, {{name}}! 😊\n\nআজ আপনি কী ধরনের শারীরিক সমস্যা অনুভব করছেন তা বলবেন কি?",
+        askAgeConversational: "বিস্তারিত বলার জন্য ধন্যবাদ। আপনার শারীরিক অবস্থা আরও ভালোভাবে বোঝার জন্য আমি আপনাকে কয়েকটি দ্রুত প্রশ্ন করতে চাই।\n\nআপনার বয়স কত?",
+        emergencyWarning: "⚠️ এই উপসর্গগুলির জন্য অবিলম্বে জরুরি চিকিৎসার প্রয়োজন হতে পারে। \n\nঅনুগ্রহ করে অবিলম্বে আপনার নিকটস্থ জরুরি পরিষেবাতে যোগাযোগ করুন অথবা নিকটস্থ হাসপাতালে যান।"
+      },
+      boolean: {
+        yes: "হ্যাঁ",
+        no: "না"
+      },
+      validation: {
+        invalidName: "দুঃখিত, নামটি সঠিক মনে হচ্ছে না। অনুগ্রহ করে একটি সঠিক নাম বলুন (কমপক্ষে ২ টি অক্ষর, শুধুমাত্র বর্ণমালা)।",
+        invalidSymptom: "অনুগ্রহ করে আপনার উপসর্গগুলি একটু বিস্তারিতভাবে বর্ণনা করতে পারেন? (কমপক্ষে ১০ টি অক্ষর)",
+        invalidAge: "অনুগ্রহ করে ০ থেকে ১২০ এর মধ্যে একটি সঠিক বয়স লিখুন।",
+        invalidGender: "অনুগ্রহ করে উপলব্ধ বিকল্পগুলির একটি নির্বাচন করুন।"
       },
       aiMessages: {
         greetings: [

@@ -10,50 +10,85 @@ import { useSymptomChat } from '@/hooks/useSymptomChat';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { RotateCcw } from 'lucide-react';
+import { Download, MessageSquare, PlusCircle } from 'lucide-react';
 import { BottomNav } from '@/components/BottomNav';
+import { downloadAssessmentPDF } from '@/utils/generatePDF';
 
-const ChatWithDoctorUncle = () => {
+export const ChatWithDoctorUncle = () => {
   const { t } = useTranslation();
   const {
     session,
     isTyping,
     currentQuestion,
     currentOptions,
+    inputType,
     inputPlaceholder,
     answerQuestion,
-    resetSession
+    resetSession,
+    askAnotherQuestion
   } = useSymptomChat();
+
+  const handleDownloadPDF = () => {
+    if (session.result) {
+      downloadAssessmentPDF({
+        id: session.id,
+        createdAt: new Date().toISOString(),
+        patientInfo: session.patientInfo,
+        initialSymptom: session.initialSymptom,
+        result: session.result
+      });
+    }
+  };
+
+  // Calculate Progress Percent dynamically based on the state machine
+  const getProgressPercent = () => {
+    switch (session.status) {
+      case 'WELCOME':
+      case 'NAME':
+        return 15;
+      case 'SYMPTOMS':
+        return 35;
+      case 'AGE':
+        return 50;
+      case 'GENDER':
+        return 65;
+      case 'FOLLOW_UP_QUESTIONS':
+        return 80;
+      case 'ANALYZING':
+        return 95;
+      case 'REPORT':
+      case 'COMPLETE':
+        return 100;
+      default:
+        return 0;
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground pb-20 md:pb-8">
       <Header />
       
       <main className="flex-1 container max-w-2xl py-6 px-4">
-        {session.status === 'complete' && (
-          <div className="flex justify-between items-center mb-4">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={resetSession}
-              className="gap-2 text-xs font-medium border-border"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>{t('nextSteps.startNew')}</span>
-            </Button>
+        {/* Progress Indicator */}
+        {session.status !== 'COMPLETE' && (
+          <div className="w-full bg-muted h-1.5 rounded-full overflow-hidden mb-4">
+            <div 
+              className="bg-teal-600 dark:bg-teal-500 h-full transition-all duration-500 ease-out"
+              style={{ width: `${getProgressPercent()}%` }}
+            />
           </div>
         )}
 
         {/* Chat Conversation Intake / Follow-up Screen */}
-        {session.status !== 'complete' && (
-          <div className="flex flex-col h-[calc(100vh-180px)] bg-card rounded-2xl border border-border p-4 shadow-sm animate-fade-in-up">
+        {session.status !== 'COMPLETE' && (
+          <div className="flex flex-col h-[calc(100vh-200px)] bg-card rounded-2xl border border-border p-4 shadow-sm animate-fade-in-up">
             <ScrollArea className="flex-1 pr-4">
               <ChatHistory messages={session.messages} />
             </ScrollArea>
             
             <div className="pt-4 border-t border-border mt-4">
               <QuestionFlow
-                currentQuestion={currentQuestion}
+                inputType={inputType}
                 options={currentOptions}
                 placeholder={inputPlaceholder}
                 onAnswer={answerQuestion}
@@ -64,7 +99,7 @@ const ChatWithDoctorUncle = () => {
         )}
 
         {/* Results Screen */}
-        {session.status === 'complete' && session.result && (
+        {session.status === 'COMPLETE' && session.result && (
           <div className="space-y-6 animate-fade-in-up">
             {/* Doctor Uncle's Summary */}
             <div className="flex items-start gap-3 p-4 rounded-2xl bg-gradient-to-br from-teal-500/10 via-primary/10 to-secondary border border-teal-500/20">
@@ -99,6 +134,34 @@ const ChatWithDoctorUncle = () => {
               steps={session.result.nextSteps}
               onStartOver={resetSession}
             />
+
+            {/* Premium Call-to-Action Bar */}
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <Button
+                onClick={resetSession}
+                variant="outline"
+                className="flex-1 gap-2 py-5 font-semibold text-xs border-border"
+              >
+                <PlusCircle className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                <span>{t('landingPage.ctaButton', 'Start New Assessment')}</span>
+              </Button>
+              <Button
+                onClick={handleDownloadPDF}
+                variant="outline"
+                className="flex-1 gap-2 py-5 font-semibold text-xs border-teal-500/20 hover:border-teal-500 text-teal-700 dark:text-teal-400"
+              >
+                <Download className="w-4 h-4" />
+                <span>{t('historyPage.downloadPdf', 'Download Report')}</span>
+              </Button>
+              <Button
+                onClick={askAnotherQuestion}
+                variant="default"
+                className="flex-1 gap-2 py-5 font-semibold text-xs bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 text-white"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>{t('chatPage.askAnotherQuestion', 'Ask Another Question')}</span>
+              </Button>
+            </div>
 
             {/* Final Disclaimer */}
             <p className="text-xs text-muted-foreground text-center px-4 pb-8">
