@@ -46,10 +46,10 @@ export const ChatHistory = ({ messages }: ChatHistoryProps) => {
                 : 'bg-chat-user text-chat-user-foreground rounded-tr-sm'
             }`}
           >
-            <p className="text-sm leading-relaxed whitespace-pre-wrap">
+            <p className="text-base leading-relaxed whitespace-pre-wrap">
               {message.content}
             </p>
-            <span className="text-[10px] opacity-60 mt-1 block">
+            <span className="text-xs opacity-60 mt-1.5 block">
               {message.timestamp.toLocaleTimeString([], {
                 hour: '2-digit',
                 minute: '2-digit'

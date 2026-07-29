@@ -32,10 +32,10 @@ export const HomeRemediesCard = ({ remedies }: HomeRemediesCardProps) => {
             >
               <span className="text-2xl">{remedy.icon}</span>
               <div>
-                <h4 className="font-semibold text-foreground text-sm">
+                <h4 className="font-semibold text-foreground text-base">
                   {remedy.title}
                 </h4>
-                <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
+                <p className="text-sm text-muted-foreground mt-0.5 leading-relaxed">
                   {remedy.description}
                 </p>
               </div>

@@ -105,14 +105,14 @@ export const ChatWithDoctorUncle = () => {
             <div className="flex items-start gap-3 p-4 rounded-2xl bg-gradient-to-br from-teal-500/10 via-primary/10 to-secondary border border-teal-500/20">
               <span className="text-3xl">👨‍⚕️</span>
               <div>
-                <h2 className="font-bold text-lg text-foreground">
+                <h2 className="font-bold text-xl text-foreground">
                   {t('index.assessmentReady')}
                 </h2>
-                <p className="text-sm text-muted-foreground mt-1">
+                <p className="text-base text-muted-foreground mt-1">
                   {t('index.assessmentBasedOn', { symptom: session.initialSymptom })}
                 </p>
                 {session.patientInfo.name && (
-                  <p className="text-xs text-teal-600 dark:text-teal-400 font-semibold mt-1">
+                  <p className="text-sm text-teal-600 dark:text-teal-400 font-semibold mt-1">
                     👤 {t('chatPage.patientLabel')}: {session.patientInfo.name} ({session.patientInfo.age} {t('chatPage.yrs')}, {session.patientInfo.gender})
                   </p>
                 )}
@@ -140,7 +140,7 @@ export const ChatWithDoctorUncle = () => {
               <Button
                 onClick={resetSession}
                 variant="outline"
-                className="flex-1 gap-2 py-5 font-semibold text-xs border-border"
+                className="flex-1 gap-2 py-5 font-semibold text-sm border-border"
               >
                 <PlusCircle className="w-4 h-4 text-teal-600 dark:text-teal-400" />
                 <span>{t('landingPage.ctaButton', 'Start New Assessment')}</span>
@@ -148,7 +148,7 @@ export const ChatWithDoctorUncle = () => {
               <Button
                 onClick={handleDownloadPDF}
                 variant="outline"
-                className="flex-1 gap-2 py-5 font-semibold text-xs border-teal-500/20 hover:border-teal-500 text-teal-700 dark:text-teal-400"
+                className="flex-1 gap-2 py-5 font-semibold text-sm border-teal-500/20 hover:border-teal-500 text-teal-700 dark:text-teal-400"
               >
                 <Download className="w-4 h-4" />
                 <span>{t('historyPage.downloadPdf', 'Download Report')}</span>
@@ -156,7 +156,7 @@ export const ChatWithDoctorUncle = () => {
               <Button
                 onClick={askAnotherQuestion}
                 variant="default"
-                className="flex-1 gap-2 py-5 font-semibold text-xs bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 text-white"
+                className="flex-1 gap-2 py-5 font-semibold text-sm bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 text-white"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>{t('chatPage.askAnotherQuestion', 'Ask Another Question')}</span>
@@ -164,7 +164,7 @@ export const ChatWithDoctorUncle = () => {
             </div>
 
             {/* Final Disclaimer */}
-            <p className="text-xs text-muted-foreground text-center px-4 pb-8">
+            <p className="text-sm text-muted-foreground text-center px-4 pb-8">
               {t('index.disclaimer')}
             </p>
           </div>

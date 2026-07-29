@@ -61,7 +61,7 @@ export const QuestionFlow = ({
             <button
               key={option}
               onClick={() => onAnswer(option)}
-              className="px-6 py-3 rounded-xl bg-card border-2 border-border text-foreground text-sm font-semibold hover:border-teal-500 hover:bg-teal-50/50 dark:hover:bg-teal-950/30 transition-all active:scale-95 shadow-sm min-w-[100px]"
+              className="px-8 py-4 rounded-xl bg-card border-2 border-border text-foreground text-base font-semibold hover:border-teal-500 hover:bg-teal-50/50 dark:hover:bg-teal-950/30 transition-all active:scale-95 shadow-sm min-w-[120px]"
             >
               {option}
             </button>
@@ -72,7 +72,7 @@ export const QuestionFlow = ({
       {/* Scale Input Type */}
       {inputType === 'scale' && (
         <div className="flex flex-col gap-2">
-          <span className="text-xs text-muted-foreground font-medium px-1">
+          <span className="text-sm text-muted-foreground font-medium px-1">
             {t('questionFlow.scaleLabel', 'Select a value from 1 (mild) to 10 (severe):')}
           </span>
           <div className="flex flex-wrap gap-1.5">
@@ -80,7 +80,7 @@ export const QuestionFlow = ({
               <button
                 key={val}
                 onClick={() => onAnswer(val)}
-                className="w-10 h-10 rounded-full bg-card border-2 border-border text-foreground text-sm font-bold hover:border-teal-500 hover:bg-teal-50/50 dark:hover:bg-teal-950/30 transition-all active:scale-95 flex items-center justify-center shadow-2xs"
+                className="w-11 h-11 rounded-full bg-card border-2 border-border text-foreground text-base font-bold hover:border-teal-500 hover:bg-teal-50/50 dark:hover:bg-teal-950/30 transition-all active:scale-95 flex items-center justify-center shadow-2xs"
               >
                 {val}
               </button>
@@ -96,7 +96,7 @@ export const QuestionFlow = ({
             <button
               key={option}
               onClick={() => onAnswer(option)}
-              className="px-4 py-2.5 rounded-xl bg-card border-2 border-border text-foreground text-sm font-medium hover:border-teal-500 hover:bg-teal-50/50 dark:hover:bg-teal-950/30 transition-all active:scale-95 shadow-2xs"
+              className="px-5 py-3 rounded-xl bg-card border-2 border-border text-foreground text-base font-medium hover:border-teal-500 hover:bg-teal-50/50 dark:hover:bg-teal-950/30 transition-all active:scale-95 shadow-2xs"
             >
               {option}
             </button>
@@ -116,15 +116,15 @@ export const QuestionFlow = ({
                 handleSubmit();
               }
             }}
-            className="flex-1 bg-card border-border focus-visible:ring-teal-500"
+            className="flex-1 bg-card border-border focus-visible:ring-teal-500 text-base h-12"
           />
           <Button
             onClick={handleSubmit}
             disabled={!customAnswer.trim()}
             size="icon"
-            className="bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 text-white shrink-0"
+            className="bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 text-white shrink-0 h-12 w-20"
           >
-            <Send className="h-4 w-4" />
+            <Send className="h-8 w-8" />
           </Button>
         </div>
       )}

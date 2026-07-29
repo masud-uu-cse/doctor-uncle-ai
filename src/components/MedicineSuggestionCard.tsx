@@ -36,21 +36,21 @@ export const MedicineSuggestionCard = ({ medicines }: MedicineSuggestionCardProp
               </span>
             </div>
             
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 text-base text-muted-foreground">
               <Clock className="h-3.5 w-3.5" />
               <span>{medicine.frequency}</span>
             </div>
             
             {medicine.notes && (
-              <div className="flex items-start gap-2 text-xs text-muted-foreground bg-background/80 rounded-lg p-2">
-                <Info className="h-3.5 w-3.5 mt-0.5 flex-shrink-0" />
+              <div className="flex items-start gap-2 text-sm text-muted-foreground bg-background/80 rounded-lg p-2">
+                <Info className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <span>{medicine.notes}</span>
               </div>
             )}
           </div>
         ))}
         
-        <p className="text-xs text-muted-foreground text-center pt-2 border-t border-border">
+        <p className="text-sm text-muted-foreground text-center pt-2 border-t border-border">
           {t('medicine.disclaimer')}
         </p>
       </CardContent>
