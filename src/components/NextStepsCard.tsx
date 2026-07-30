@@ -33,7 +33,7 @@ export const NextStepsCard = ({ steps, onStartOver }: NextStepsCardProps) => {
             <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center">
               {index + 1}
             </span>
-            <p className="text-sm text-foreground leading-relaxed pt-0.5">
+            <p className="text-base text-foreground leading-relaxed pt-0.5">
               {step}
             </p>
           </div>

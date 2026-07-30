@@ -66,7 +66,7 @@ export const BottomNav = ({ activeTab, onTriageClick }: BottomNavProps) => {
             <button
               key={item.key}
               onClick={() => handleClick(item)}
-              className={`flex flex-col items-center gap-1 font-medium text-xs py-1 transition-colors ${
+              className={`flex flex-col items-center gap-1 font-medium text-sm py-1 transition-colors ${
                 isActive
                   ? 'text-teal-700 dark:text-teal-400'
                   : 'text-muted-foreground hover:text-foreground'

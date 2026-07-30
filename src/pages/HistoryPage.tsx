@@ -80,11 +80,11 @@ const HistoryCard = ({ record, onSelect, onDelete }: HistoryCardProps) => {
       <div className="flex-1 min-w-0" onClick={onSelect}>
         {/* Severity badge + date */}
         <div className="flex items-center justify-between gap-2 mb-2">
-          <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-0.5 rounded-full border ${badge}`}>
+          <span className={`inline-flex items-center gap-1 text-sm font-semibold px-2.5 py-0.5 rounded-full border ${badge}`}>
             {severityIcon[level]} {level.charAt(0).toUpperCase() + level.slice(1)}
           </span>
-          <span className="flex items-center gap-1 text-[11px] text-muted-foreground">
-            <Calendar className="w-3 h-3" />
+          <span className="flex items-center gap-1 text-xs text-muted-foreground">
+            <Calendar className="w-3.5 h-3.5" />
             {formatDate(record.createdAt)}
           </span>
         </div>
@@ -92,19 +92,19 @@ const HistoryCard = ({ record, onSelect, onDelete }: HistoryCardProps) => {
         {/* Patient info */}
         <div className="flex items-center gap-1.5 mb-1.5">
           <User className="w-3.5 h-3.5 text-teal-500" />
-          <span className="text-sm font-semibold text-foreground truncate">
+          <span className="text-base font-semibold text-foreground truncate">
             {record.patientInfo.name || t('historyPage.unknown')}
           </span>
           {record.patientInfo.age && (
-            <span className="text-xs text-muted-foreground">· {record.patientInfo.age} {t('historyPage.yrs')}</span>
+            <span className="text-sm text-muted-foreground">· {record.patientInfo.age} {t('historyPage.yrs')}</span>
           )}
           {record.patientInfo.gender && (
-            <span className="text-xs text-muted-foreground">· {record.patientInfo.gender}</span>
+            <span className="text-sm text-muted-foreground">· {record.patientInfo.gender}</span>
           )}
         </div>
 
         {/* Symptom */}
-        <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+        <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
           <span className="font-medium text-foreground/70">{t('historyPage.chiefComplaint')}: </span>
           {record.initialSymptom}
         </p>
@@ -216,18 +216,18 @@ const DetailView = ({ record, onBack, onDelete }: DetailViewProps) => {
       <div className="flex items-start gap-3 p-4 rounded-2xl bg-gradient-to-br from-teal-500/10 via-primary/10 to-secondary border border-teal-500/20">
         <span className="text-3xl">👨‍⚕️</span>
         <div className="flex-1 min-w-0">
-          <h2 className="font-bold text-lg text-foreground">{t('historyPage.assessmentReport')}</h2>
-          <p className="text-sm text-muted-foreground mt-0.5 line-clamp-2">
+          <h2 className="font-bold text-xl text-foreground">{t('historyPage.assessmentReport')}</h2>
+          <p className="text-base text-muted-foreground mt-0.5 line-clamp-2">
             <span className="font-medium">{t('historyPage.chiefComplaint')}: </span>
             {record.initialSymptom}
           </p>
-          <div className="flex flex-wrap gap-3 mt-2 text-xs text-teal-600 dark:text-teal-400 font-semibold">
-            <span className="flex items-center gap-1"><User className="w-3 h-3" /> {record.patientInfo.name}</span>
+          <div className="flex flex-wrap gap-3 mt-2 text-sm text-teal-600 dark:text-teal-400 font-semibold">
+            <span className="flex items-center gap-1"><User className="w-3.5 h-3.5" /> {record.patientInfo.name}</span>
             {record.patientInfo.age && <span>· {record.patientInfo.age} {t('historyPage.yrs')}</span>}
             {record.patientInfo.gender && <span>· {record.patientInfo.gender}</span>}
           </div>
-          <p className="mt-1 text-[11px] text-muted-foreground flex items-center gap-1">
-            <Calendar className="w-3 h-3" />
+          <p className="mt-1 text-xs text-muted-foreground flex items-center gap-1">
+            <Calendar className="w-3.5 h-3.5" />
             {formatDate(record.createdAt)}
           </p>
         </div>

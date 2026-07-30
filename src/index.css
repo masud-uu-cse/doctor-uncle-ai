@@ -117,9 +117,17 @@
     @apply border-border;
   }
 
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Nunito', sans-serif;
+    line-height: 1.7;
+    font-size: 1rem;
   }
 }
 

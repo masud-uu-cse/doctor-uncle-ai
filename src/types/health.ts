@@ -40,11 +40,24 @@ export interface HealthResult {
   nextSteps: string[];
 }
 
+export type SessionState = 
+  | 'WELCOME' 
+  | 'NAME' 
+  | 'SYMPTOMS' 
+  | 'EMERGENCY_CHECK' 
+  | 'AGE' 
+  | 'GENDER' 
+  | 'FOLLOW_UP_QUESTIONS' 
+  | 'ANALYZING' 
+  | 'REPORT' 
+  | 'COMPLETE';
+
 export interface SymptomSession {
   id: string;
   patientInfo: PatientInfo;
   initialSymptom: string;
   messages: Message[];
   result?: HealthResult;
-  status: 'input_name' | 'input_age' | 'input_gender' | 'input_symptom' | 'questioning' | 'complete';
+  status: SessionState;
 }
+

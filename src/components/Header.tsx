@@ -41,7 +41,7 @@ export const Header = () => {
             <h1 className="text-lg font-bold text-foreground leading-tight">
               {t('header.title')}
             </h1>
-            <span className="text-xs text-muted-foreground">
+            <span className="text-sm text-muted-foreground">
               {t('header.subtitle')}
             </span>
           </div>
@@ -55,7 +55,7 @@ export const Header = () => {
               <button
                 key={item.key}
                 onClick={() => navigate(item.path)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150 ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-base font-medium transition-all duration-150 ${
                   isActive
                     ? 'bg-teal-500/15 text-teal-700 dark:text-teal-400 border border-teal-500/30'
                     : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'

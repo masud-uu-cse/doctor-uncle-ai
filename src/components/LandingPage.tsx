@@ -19,8 +19,8 @@ export const LandingPage = () => {
       <section className="relative overflow-hidden bg-gradient-to-b from-teal-50/90 via-emerald-50/40 to-background dark:from-teal-950/40 dark:via-slate-950/80 dark:to-background pt-8 pb-12 px-4 border-b border-border/50">
         <div className="container max-w-4xl mx-auto flex flex-col items-center text-center space-y-6">
           {/* Badge */}
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-teal-100/80 dark:bg-teal-900/50 border border-teal-200 dark:border-teal-800 text-teal-800 dark:text-teal-300 text-xs font-semibold tracking-wider uppercase shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-teal-100/80 dark:bg-teal-900/50 border border-teal-200 dark:border-teal-800 text-teal-800 dark:text-teal-300 text-sm font-semibold tracking-wider uppercase shadow-xs">
+            <Sparkles className="w-4 h-4 text-teal-600 dark:text-teal-400" />
             <span>{t('landingPage.badge')}</span>
           </div>
 
@@ -34,7 +34,7 @@ export const LandingPage = () => {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
             {t('landingPage.subtitle')}
           </p>
 
@@ -79,11 +79,11 @@ export const LandingPage = () => {
               {t('landingPage.traditionTitle')}
             </h3>
 
-            <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+            <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
               {t('landingPage.traditionText')}
             </p>
 
-            <blockquote className="border-l-4 border-teal-500 dark:border-teal-400 pl-4 py-2 my-2 bg-teal-50/50 dark:bg-teal-950/40 rounded-r-lg text-xs md:text-sm text-foreground/90 italic">
+            <blockquote className="border-l-4 border-teal-500 dark:border-teal-400 pl-4 py-2 my-2 bg-teal-50/50 dark:bg-teal-950/40 rounded-r-lg text-sm md:text-base text-foreground/90 italic">
               {t('landingPage.traditionQuote')}
             </blockquote>
           </CardContent>
@@ -106,7 +106,7 @@ export const LandingPage = () => {
                   <h4 className="font-semibold text-foreground text-base">
                     {t('landingPage.step1Title')}
                   </h4>
-                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                     {t('landingPage.step1Desc')}
                   </p>
                 </div>
@@ -123,7 +123,7 @@ export const LandingPage = () => {
                   <h4 className="font-semibold text-foreground text-base">
                     {t('landingPage.step2Title')}
                   </h4>
-                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                     {t('landingPage.step2Desc')}
                   </p>
                 </div>
@@ -140,7 +140,7 @@ export const LandingPage = () => {
                   <h4 className="font-semibold text-foreground text-base">
                     {t('landingPage.step3Title')}
                   </h4>
-                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                     {t('landingPage.step3Desc')}
                   </p>
                 </div>
@@ -168,11 +168,11 @@ export const LandingPage = () => {
         {/* Medical Disclaimer Card */}
         <Card className="border-amber-200/80 dark:border-amber-900/50 bg-amber-50/70 dark:bg-amber-950/30 text-amber-900 dark:text-amber-200 shadow-xs">
           <CardContent className="p-5 space-y-2">
-            <div className="flex items-center gap-2 font-bold text-xs md:text-sm uppercase tracking-wider text-amber-800 dark:text-amber-400">
+            <div className="flex items-center gap-2 font-bold text-sm md:text-base uppercase tracking-wider text-amber-800 dark:text-amber-400">
               <AlertTriangle className="w-4 h-4 shrink-0 text-amber-600 dark:text-amber-400" />
               <span>{t('landingPage.disclaimerTitle')}</span>
             </div>
-            <p className="text-xs md:text-sm leading-relaxed text-amber-800/90 dark:text-amber-300/90">
+            <p className="text-sm md:text-base leading-relaxed text-amber-800/90 dark:text-amber-300/90">
               {t('landingPage.disclaimerText')}
             </p>
           </CardContent>
@@ -181,7 +181,7 @@ export const LandingPage = () => {
       </main>
 
       {/* Footer */}
-      <footer className="mt-auto border-t border-border bg-card/50 py-8 px-4 text-center text-xs text-muted-foreground">
+      <footer className="mt-auto border-t border-border bg-card/50 py-8 px-4 text-center text-sm text-muted-foreground">
         <div className="container max-w-2xl mx-auto space-y-4">
           <div className="flex items-center justify-center gap-2 font-bold text-sm text-foreground">
             <span>👨‍⚕️</span>
@@ -196,7 +196,7 @@ export const LandingPage = () => {
             <span>•</span>
             <a href="#contact" className="hover:text-foreground transition-colors">{t('landingPage.footer.contact')}</a>
           </div>
-          <p className="text-[11px] text-muted-foreground/70">
+          <p className="text-xs text-muted-foreground/70">
             © {new Date().getFullYear()} Doctor Uncle AI. Built with care for family health.
           </p>
         </div>

@@ -60,7 +60,7 @@ export const TriageResultCard = ({ level, possibleCauses }: TriageResultCardProp
           {possibleCauses.map((cause, index) => (
             <li key={index} className="flex items-start gap-2">
               <span className={`mt-1.5 w-2 h-2 rounded-full flex-shrink-0 ${config.badgeClass}`} />
-              <span className="text-sm text-muted-foreground">{cause}</span>
+              <span className="text-base text-muted-foreground">{cause}</span>
             </li>
           ))}
         </ul>
